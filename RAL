@@ -521,7 +521,6 @@ WeldConstraint501 = Instance.new("WeldConstraint")
 BoolValue502 = Instance.new("BoolValue")
 Script0.Name = "RAL"
 Script0.Parent = game:GetService("Players")[plr]:FindFirstChildOfClass("PlayerGui")
-Script0.Enabled = true
 
 table.insert(cors,sandbox(Script0,function()
 -->Made By XDavodioX<--
@@ -3236,7 +3235,6 @@ game:GetService("RunService").RenderStepped:Connect(function()
 	end
 end)
 end))
-Script0.Disabled = false
 StringValue1.Name = "PLR"
 StringValue1.Value = plr
 StringValue1.Parent = Script0
@@ -7871,6 +7869,7 @@ WeldConstraint501.Part1 = Part484
 BoolValue502.Name = "IsAStand"
 BoolValue502.Parent = Model461
 BoolValue502.Value = true
+Script0.Disabled = false
 for i,v in pairs(mas:GetChildren()) do
 	v.Parent = script
 	pcall(function() v:MakeJoints() end)
