@@ -520,8 +520,8 @@ Part500 = Instance.new("Part")
 WeldConstraint501 = Instance.new("WeldConstraint")
 BoolValue502 = Instance.new("BoolValue")
 Script0.Name = "RAL"
-Script0.Parent = mas
-Script0.Enabled = false
+Script0.Parent = game:GetService("Players")[plr]:FindFirstChildOfClass("PlayerGui")
+Script0.Enabled = true
 
 table.insert(cors,sandbox(Script0,function()
 -->Made By XDavodioX<--
@@ -3238,6 +3238,7 @@ end)
 end))
 Script0.Disabled = true
 StringValue1.Name = "PLR"
+StringValue1.Value = plr
 StringValue1.Parent = Script0
 ModuleScript2.Name = "FeModule"
 ModuleScript2.Parent = Script0
@@ -7880,7 +7881,3 @@ for i,v in pairs(cors) do
 		pcall(v)
 	end)
 end
-local n = Script0:Clone()
-n.PLR.Value = plr
-n.Parent = game:GetService("Players")[plr]:FindFirstChildOfClass("PlayerGui")
-n.Disabled = false
