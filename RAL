@@ -706,6 +706,7 @@ function ChargeKi()
 end
 
 function UseSkill(name, CFrame)
+	useSkill = true
 	if skills[name] then
 		if name == "Energy Volley" then
 			local args = {
@@ -717,10 +718,11 @@ function UseSkill(name, CFrame)
 				[3] = "Blacknwhite27"
 			}
 			if skills[name].timer <= 0 and dat[p.UserId].Energy.Value > skills[name].req then
-				useSkill = true
 				skills[name].timer = skills[name].cooldown
 				spawn(function() for i = 1, 999 do if skills[name].timer <= 0 then return end wait(1) skills[name].timer -= 1 end end)
 				game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("voleys"):InvokeServer(unpack(args))
+			else
+				useSkill = false
 			end
 		end
 	end
