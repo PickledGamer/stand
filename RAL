@@ -914,9 +914,15 @@ function mainRunningFunction()
 	end
 	if Fighting == true then
 		if enemyModel ~= nil then
-			if enemyModel:FindFirstChild("HumanoidRootPart") and enemyModel:FindFirstChild("Humanoid") then
+			if enemyModel:FindFirstChild("HumanoidRootPart") and enemyModel:FindFirstChild("Humanoid") and enemyModel:FindFirstChild("Status") then
 				if enemyModel.Humanoid.Health > 0 then
-					workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart").CFrame = enemyModel.HumanoidRootPart.CFrame * CFrame.new(0,0,3)
+					if enemyModel.Status:FindFirstChild("UsingSkill") then
+						if enemyModel.Status.UsingSkill == true then
+							workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart").CFrame = enemyModel.HumanoidRootPart.CFrame * CFrame.new(0,0,-200)
+						else
+							workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart").CFrame = enemyModel.HumanoidRootPart.CFrame * CFrame.new(0,0,3)
+						end
+					end
 				end
 			end
 		end
