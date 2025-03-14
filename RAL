@@ -165,6 +165,13 @@ local skills = {
 	["Energy Volley"] = {
 		["req"] = 4000,
 		["cooldown"] = 5.5,
+		["subname"] = "voleys",
+		["timer"] = 0
+	},
+	["Soul Punisher"] = {
+		["req"] = 40000000,
+		["cooldown"] = 15.5,
+		["subname"] = "Hak",
 		["timer"] = 0
 	}
 }
@@ -178,7 +185,12 @@ local mskills = {
 		["req"] = 90000,
 		["cooldown"] = 5.5,
 		["timer"] = 0
-	}
+	},
+	["Super Dragon Fist"] = {
+		["req"] = 60000000,
+		["cooldown"] = 5.5,
+		["timer"] = 0
+	},
 }
 local enemyModel = nil
 local afa = Instance.new("BoolValue", workspace)
@@ -710,39 +722,37 @@ function ChargeKi()
 	game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("of2"):FireServer()
 end
 
-function UseSkill(name, CFrame)
+function UseSkill(CFrame)
 	useSkill = true
-	if skills[name] then
-		if name == "Energy Volley" then
-			local args = {
-				[1] = name,
-				[2] = {
-					["FaceMouse"] = true,
-					["MouseHit"] = CFrame
-				},
-				[3] = "Blacknwhite27"
-			}
-			if skills[name].timer <= 0 and dat[p.UserId].Energy.Value > skills[name].req then
-				skills[name].timer = skills[name].cooldown
-				spawn(function() for i = 1, 999 do if skills[name].timer <= 0 then return end wait(0.01) skills[name].timer -= 0.01 end end)
-				game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("voleys"):InvokeServer(unpack(args))
-			else
-				useSkill = false
-			end
+	for i,v in pairs(skills) do
+		local args = {
+			[1] = i,
+			[2] = {
+				["FaceMouse"] = true,
+				["MouseHit"] = CFrame
+			},
+			[3] = "Blacknwhite27"
+		}
+		if v.timer <= 0 and dat[p.UserId].Energy.Value > v.req then
+			v.timer = v.cooldown
+			spawn(function() for i = 1, 999 do if v.timer <= 0 then return end wait(0.01) v.timer -= 0.01 end end)
+			game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild(v.subname):InvokeServer(unpack(args))
+		else
+			useSkill = false
 		end
 	end
 end
 
-function UseMSkill(name)
+function UseMSkill()
 	useMSkill = true
-	if mskills[name] then
+	for i,v in pairs(mskills) do
 		local args = {
-			[1] = name,
+			[1] = i,
 			[2] = "Blacknwhite27"
 		}
-		if mskills[name].timer <= 0 and dat[p.UserId].Strength.Value > mskills[name].req and dat[p.UserId].Speed.Value > mskills[name].req then
-			mskills[name].timer = mskills[name].cooldown
-			spawn(function() for i = 1, 999 do if mskills[name].timer <= 0 then return end wait(0.01) mskills[name].timer -= 0.01 end end)
+		if v.timer <= 0 and dat[p.UserId].Strength.Value > v.req and dat[p.UserId].Speed.Value > v.req then
+			v.timer = v.cooldown
+			spawn(function() for i = 1, 999 do if v.timer <= 0 then return end wait(0.01) v.timer -= 0.01 end end)
 			game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("mel"):InvokeServer(unpack(args))
 		else
 			useMSkill = false
@@ -810,13 +820,12 @@ function StartAuto()
 							task.wait()
 							Fighting = true
 							spawn(function()
-								UseSkill("Energy Volley", v.HumanoidRootPart.CFrame)
+								UseSkill(v.HumanoidRootPart.CFrame)
 								useSkill = false
 							end)
 							spawn(function()
 								if not useSkill then 
-									UseMSkill("Meteor Crash")
-									UseMSkill("Mach Kick")
+									UseMSkill()
 									useMSkill = false
 								end
 							end)
