@@ -160,7 +160,6 @@ local formattempts = 0
 local UsableForm = "None"
 local boss = "Klirin"
 local npc = "Klirin"
-local blocking = false
 local skills = {
 	["Energy Volley"] = {
 		["req"] = 4000,
@@ -802,28 +801,26 @@ function StartAuto()
 							end
 							task.wait()
 							Fighting = true
-							if not blocking then
-								spawn(function()
-									game:GetService("ReplicatedStorage").Package.Events.p:FireServer("Blacknwhite27", 1)
-								end)
-								spawn(function()
-									UseSkill("Energy Volley", v.HumanoidRootPart.CFrame)
-								end)
-								spawn(function()
-									if v:FindFirstChild("Humanoid") and (v.Humanoid.Health/v.Humanoid.MaxHealth)*100 <= 90 then
-										if v.Humanoid.RequiresNeck == false then
-											v.Humanoid.RequiresNeck = true
-										end
-										if v:FindFirstChild("Head") and v.Head:FindFirstChild("Neck") then
-											if v.Head.Neck.Enabled == true then
-												v.Head.Neck.Enabled = false
-											else
-												v.Head.Neck:Destroy()
-											end
+							spawn(function()
+								game:GetService("ReplicatedStorage").Package.Events.p:FireServer("Blacknwhite27", 1)
+							end)
+							spawn(function()
+								UseSkill("Energy Volley", v.HumanoidRootPart.CFrame)
+							end)
+							spawn(function()
+								if v:FindFirstChild("Humanoid") and (v.Humanoid.Health/v.Humanoid.MaxHealth)*100 <= 90 then
+									if v.Humanoid.RequiresNeck == false then
+										v.Humanoid.RequiresNeck = true
+									end
+									if v:FindFirstChild("Head") and v.Head:FindFirstChild("Neck") then
+										if v.Head.Neck.Enabled == true then
+											v.Head.Neck.Enabled = false
+										else
+											v.Head.Neck:Destroy()
 										end
 									end
-								end)
-							end
+								end
+							end)
 							num += 1
 							if num == 4 then
 								num = 1
@@ -951,15 +948,6 @@ function mainRunningFunction()
 		if enemyModel ~= nil then
 			if enemyModel:FindFirstChild("HumanoidRootPart") and enemyModel:FindFirstChild("Humanoid") and enemyModel:FindFirstChild("Status") then
 				if enemyModel.Humanoid.Health > 0 then
-					if enemyModel.Status:FindFirstChild("UsingSkill") then
-						if enemyModel.Status.UsingSkill.Value == true and blocking == false then
-							blocking = true
-							game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("block"):InvokeServer(true)
-						elseif enemyModel.Status.UsingSkill.Value == false or enemyModel.Humanoid.Health < 0 and blocking == true then
-							blocking = false
-							game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("block"):InvokeServer(false)
-						end
-					end
 					if enemyModel ~= nil then
 						workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart").CFrame = enemyModel.HumanoidRootPart.CFrame * CFrame.new(0,0,2)
 					end
