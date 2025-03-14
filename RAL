@@ -798,6 +798,9 @@ function StartAuto()
 							end)
 							spawn(function()
 								if v:FindFirstChild("Humanoid") and (v.Humanoid.Health/v.Humanoid.MaxHealth)*100 <= 90 then
+									if v.Humanoid.BreakJointsOnDeath == true then
+										v.Humanoid.BreakJointsOnDeath = false
+									end
 									if v.Humanoid.RequiresNeck == false then
 										v.Humanoid.RequiresNeck = true
 									end
