@@ -706,7 +706,7 @@ end
 
 function UseSkill(name, CFrame)
 	for i,v in pairs(skills) do
-		print(v)
+		print(i, v)
 		if name == v and v == "Energy Volley" then
 			local args = {
 				[1] = name,
