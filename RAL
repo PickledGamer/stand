@@ -193,7 +193,7 @@ local Transportation = false
 load()
 wait(2)
 if game.PlaceId == earthPlanet then
-	wait(7)
+	wait(2)
 	game:GetService("ReplicatedStorage").Package.Events.Start:InvokeServer()
 	game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Health = 0
 	hasTeleported = false
