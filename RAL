@@ -940,7 +940,7 @@ function mainRunningFunction()
 	--
 	if Fighting == true then
 		if enemyModel ~= nil then
-			if enemyModel:FindFirstChild("HumanoidRootPart") and enemyModel:FindFirstChild("Humanoid") and enemyModel:FindFirstChild("Status") then
+			if enemyModel:FindFirstChild("HumanoidRootPart") and enemyModel:FindFirstChild("Humanoid") then
 				if enemyModel.Humanoid.Health > 0 then
 					if enemyModel ~= nil then
 						workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart"):WaitForChild("EnemyWeld").Part1 = enemyModel.HumanoidRootPart
@@ -951,6 +951,9 @@ function mainRunningFunction()
 				end
 			end
 		end
+	end
+	if workspace.Living:WaitForChild(p.Name):WaitForChild("Humanoid").Health <= 0 and workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart"):WaitForChild("EnemyWeld").Part1 ~= nil then
+		workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart"):WaitForChild("EnemyWeld").Part1 = nil
 	end
 	if Rebirth and CheckStats(CalcRebCost()) and not justRebirthed then
 		game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("reb"):InvokeServer()
