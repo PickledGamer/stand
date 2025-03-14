@@ -695,8 +695,10 @@ function Trans(form)
 	end
 end
 
+local tpQueued = false
 p.OnTeleport:Connect(function(State)
-	if queueteleport then
+	if queueteleport and (not tpQueued) then
+		tpQueued = true
 		queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/PickledGamer/stand/main/RAL'))()")
 	end
 end)
