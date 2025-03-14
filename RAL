@@ -826,6 +826,10 @@ function StartAuto()
 						args = {
 							[1] = billsTPVal
 						}
+					else
+						args = {
+							[1] = Thing
+						}
 					end
 					task.wait(1)
 					if not tp then
