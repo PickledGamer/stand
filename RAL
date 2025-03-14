@@ -159,6 +159,7 @@ local formattempts = 0
 local UsableForm = "None"
 local boss = "Klirin"
 local npc = "Klirin"
+local useSkill = false
 local skills = {
 	["Energy Volley"] = {
 		["req"] = 4000,
@@ -706,7 +707,6 @@ end
 
 function UseSkill(name, CFrame)
 	if skills[name] then
-	print(table.unpack(skills[name]))
 		if name == "Energy Volley" then
 			local args = {
 				[1] = name,
@@ -717,6 +717,7 @@ function UseSkill(name, CFrame)
 				[3] = "Blacknwhite27"
 			}
 			if skills[name].timer <= 0 and dat[p.UserId].Energy.Value > skills[name].req then
+				useSkill = true
 				skills[name].timer = skills[name].cooldown
 				spawn(function() for i = 1, 999 do if skills[name].timer <= 0 then return end wait(1) skills[name].timer -= 1 end end)
 				game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("voleys"):InvokeServer(unpack(args))
@@ -785,10 +786,13 @@ function StartAuto()
 							task.wait()
 							Fighting = true
 							spawn(function()
-								game:GetService("ReplicatedStorage").Package.Events.p:FireServer("Blacknwhite27", 1)
+								UseSkill("Energy Volley", v.HumanoidRootPart.CFrame)
+								useSkill = false
 							end)
 							spawn(function()
-								UseSkill("Energy Volley", v.HumanoidRootPart.CFrame)
+								if not useSkill then
+									game:GetService("ReplicatedStorage").Package.Events.p:FireServer("Blacknwhite27", 1)
+								end
 							end)
 							spawn(function()
 								if v:FindFirstChild("Humanoid") and (v.Humanoid.Health/v.Humanoid.MaxHealth)*100 <= 90 then
