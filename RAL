@@ -1,5 +1,4 @@
 --[[
-TE
 Made By The One And Only IWallBangAndAimHack.
 the only thing stolen is anti afk but then again it was open source.
 
@@ -694,7 +693,7 @@ end
 
 p.OnTeleport:Connect(function(State)
 	if queueteleport then
-		queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/PickledGamer/DBU-AutoFarmScript.lua/refs/heads/main/DBU%20AutoFarmV5.lua?token=GHSAT0AAAAAADAKSMQFPGG45KXW2ZMHC3VGZ6TT65A')))()")
+		queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/PickledGamer/stand/refs/heads/main/RAL')))()")
 	end
 end)
 
