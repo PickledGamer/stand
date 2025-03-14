@@ -278,7 +278,7 @@ wait(5)
 ab.Text="Roblox is fucking retarded... they tried to kick you, but i stopped them :)"
 end)
 
-RUNSERV:BindToRenderStep("PlrPing", 3, function() _b2.Text="Ping: " .. p:GetNetworkPing() .. "ms" task.wait() end)
+RUNSERV:BindToRenderStep("PlrPing", 3, function() _b2.Text="Ping: " .. math.round(p:GetNetworkPing()*1000) .. "ms" task.wait() end)
 
 --local ba=Instance.new("ScreenGui")
 --local ca=Instance.new("TextLabel")
