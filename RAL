@@ -802,14 +802,6 @@ function StartAuto()
 				--	formattempts = 0
 				--end
 				if boss ~= "Wukong Black" then
-					local Thing = workspace:WaitForChild("Others"):WaitForChild("NPCs"):WaitForChild(boss)
-					local Thing2 = nil
-					for i, v in pairs(Thing:GetDescendants()) do
-						if v.Name == "TriggerChat" then
-							Thing2 = v
-						end
-					end
-					workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart").CFrame = Thing2.CFrame
 					local tp = false
 					local args
 					if game.PlaceId == billsPlanet and boss == "BACK TO EARTH" then
@@ -827,6 +819,14 @@ function StartAuto()
 							[1] = billsTPVal
 						}
 					else
+						local Thing = workspace:WaitForChild("Others"):WaitForChild("NPCs"):WaitForChild(boss)
+						local Thing2 = nil
+						for i, v in pairs(Thing:GetDescendants()) do
+							if v.Name == "TriggerChat" then
+								Thing2 = v
+							end
+						end
+						workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart").CFrame = Thing2.CFrame
 						args = {
 							[1] = Thing
 						}
