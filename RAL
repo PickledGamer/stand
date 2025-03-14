@@ -759,7 +759,7 @@ function speed()
 	return folderData.Speed.Value
 end
 function ki()
-	return game.Workspace.Living[yo.Name].Stats.Ki.Value
+	return workspace.Living:WaitForChild(p.Name):WaitForChild("Stats"):WaitForChild("Ki").Value
 end
 
 function valueMinimum()
