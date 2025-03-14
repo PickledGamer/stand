@@ -274,8 +274,8 @@ game:service'Players'.LocalPlayer.Idled:connect(function()
 bb:CaptureController()
 bb:ClickButton2(Vector2.new())
 ab.Text="Roblox has indeed made you go idle... fuck em"
-wait(2)
-ab.Text="Roblox is fucking retarded... they made you go idle and i stopped them"
+wait(5)
+ab.Text="Roblox is fucking retarded... they tried to kick you, but i stopped them :)"
 end)
 
 RUNSERV:BindToRenderStep("PlrPing", 3, function() _b2.Text="Ping: " .. p:GetNetworkPing() .. "ms" task.wait() end)
