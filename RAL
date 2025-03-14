@@ -743,7 +743,7 @@ function StartAuto()
 			if UsableForm ~= "None" and p.Status.Transformation.Value ~= UsableForm then
 				if workspace.Living:WaitForChild(p.Name):WaitForChild("Humanoid").Health > 0 then
 					repeat
-						if workspace:FindFirstChild("AutoFarmAlreadyActive") then
+						if workspace:FindFirstChild("AutoFarmAlreadyActive") or Running.Value == false then
 							break
 						end
 						task.wait(0.5)
@@ -773,7 +773,7 @@ function StartAuto()
 					if v:FindFirstChild("HumanoidRootPart") then
 						enemyModel = v
 						repeat
-							if workspace:FindFirstChild("AutoFarmAlreadyActive") then
+							if workspace:FindFirstChild("AutoFarmAlreadyActive") or Running.Value == false then
 								enemyModel = nil
 								break
 							end
