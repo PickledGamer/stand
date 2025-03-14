@@ -952,10 +952,10 @@ function mainRunningFunction()
 			if enemyModel:FindFirstChild("HumanoidRootPart") and enemyModel:FindFirstChild("Humanoid") and enemyModel:FindFirstChild("Status") then
 				if enemyModel.Humanoid.Health > 0 then
 					if enemyModel.Status:FindFirstChild("UsingSkill") then
-						if enemyModel.Status.UsingSkill.Value == true then
+						if enemyModel.Status.UsingSkill.Value == true and blocking == false then
 							blocking = true
 							game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("block"):InvokeServer(true)
-						else
+						elseif enemyModel.Status.UsingSkill.Value == false or enemyModel.Humanoid.Health < 0 and blocking == true then
 							blocking = false
 							game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("block"):InvokeServer(false)
 						end
