@@ -160,10 +160,23 @@ local UsableForm = "None"
 local boss = "Klirin"
 local npc = "Klirin"
 local useSkill = false
+local useMSkill = false
 local skills = {
 	["Energy Volley"] = {
 		["req"] = 4000,
-		["cooldown"] = 5.25,
+		["cooldown"] = 5.5,
+		["timer"] = 0
+	}
+}
+local mskills = {
+	["Meteor Crash"] = {
+		["req"] = 28000,
+		["cooldown"] = 5.5,
+		["timer"] = 0
+	},
+	["Mach Kick"] = {
+		["req"] = 90000,
+		["cooldown"] = 5.5,
 		["timer"] = 0
 	}
 }
@@ -720,6 +733,23 @@ function UseSkill(name, CFrame)
 	end
 end
 
+function UseMSkill(name)
+	useMSkill = true
+	if mskills[name] then
+		local args = {
+			[1] = name,
+			[2] = "Blacknwhite27"
+		}
+		if mskills[name].timer <= 0 and dat[p.UserId].Energy.Value > mskills[name].req then
+			mskills[name].timer = mskills[name].cooldown
+			spawn(function() for i = 1, 999 do if mskills[name].timer <= 0 then return end wait(0.01) mskills[name].timer -= 0.01 end end)
+			game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("mel"):InvokeServer(unpack(args))
+		else
+			useMSkill = false
+		end
+	end
+end
+
 function StartAuto()
 	while Running.Value do
 		if workspace:FindFirstChild("AutoFarmAlreadyActive") then
@@ -784,6 +814,14 @@ function StartAuto()
 								useSkill = false
 							end)
 							spawn(function()
+								if not useSkill then 
+									UseMSkill("Meteor Crash")
+									wait(2.75)
+									UseMSkill("Mach Kick")
+									useMSkill = false
+								end
+							end)
+							spawn(function()
 								if v:FindFirstChild("Humanoid") and (v.Humanoid.Health/v.Humanoid.MaxHealth)*100 <= 90 then
 									if v.Humanoid.BreakJointsOnDeath == true then
 										v.Humanoid.BreakJointsOnDeath = false
@@ -801,7 +839,7 @@ function StartAuto()
 								end
 							end)
 							spawn(function()
-								if not useSkill then
+								if not useMSkill then
 									game:GetService("ReplicatedStorage").Package.Events.p:FireServer("Blacknwhite27", 1)
 								end
 							end)
