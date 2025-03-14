@@ -48,7 +48,6 @@ if workspace:FindFirstChild("AutoFarmActivated") then
 	local afaa = Instance.new("BoolValue", workspace)
 	afaa.Name = "AutoFarmAlreadyActive"
 	afaa.Value = false
-	RUNSERV:UnbindFromRenderStep("PlrPing")
 	RUNSERV:UnbindFromRenderStep(mainRunName)
 	workspace.AutoFarmActivated:Destroy()
 	for i,v in pairs(game.CoreGui:GetChildren()) do
@@ -220,7 +219,6 @@ local ba=Instance.new("ScreenGui")
 local ca=Instance.new("TextLabel")
 local da=Instance.new("Frame")
 local _b=Instance.new("TextLabel")
-local _b2=Instance.new("TextLabel")
 local ab=Instance.new("TextLabel")
 ba.Parent=game.CoreGui
 ba.Name = "AntiAFKGuiBruh"
@@ -253,19 +251,6 @@ end
 _b.TextColor3=Color3.new(0,1,1)
 _b.TextSize=20;
 _b.TextScaled = true
-_b2.Parent=da
-_b2.BackgroundColor3=Color3.new(0.176471,0.176471,0.176471)
-_b2.Position=UDim2.new(0,0,1,0)
-_b2.Size=UDim2.fromScale(1,0.2)
-_b2.Font=Enum.Font.Arial;
-if p then
-	_b2.Text="Ping: " .. p:GetNetworkPing() .. "ms"
-else
-	_b2.Text="YOU ARENT REAL SO YOU HAVE NO PING!!!!!"
-end
-_b2.TextColor3=Color3.new(0,1,1)
-_b2.TextSize=20;
-_b2.TextScaled = true
 ab.Parent=da
 ab.BackgroundColor3=Color3.new(0.176471,0.176471,0.176471)
 ab.Position=UDim2.new(0,0,0.16,0)
@@ -285,7 +270,6 @@ wait(5)
 ab.Text="Roblox is fucking retarded... they tried to kick you, but i stopped them :)"
 end)
 
-RUNSERV:BindToRenderStep("PlrPing", 3, function() _b2.Text="Ping: " .. math.round(p:GetNetworkPing()*1000) .. "ms" task.wait() end)
 
 --local ba=Instance.new("ScreenGui")
 --local ca=Instance.new("TextLabel")
