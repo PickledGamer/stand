@@ -163,7 +163,7 @@ local useSkill = false
 local skills = {
 	["Energy Volley"] = {
 		["req"] = 4000,
-		["cooldown"] = 7,
+		["cooldown"] = 5.25,
 		["timer"] = 0
 	}
 }
@@ -719,7 +719,7 @@ function UseSkill(name, CFrame)
 			}
 			if skills[name].timer <= 0 and dat[p.UserId].Energy.Value > skills[name].req then
 				skills[name].timer = skills[name].cooldown
-				spawn(function() for i = 1, 999 do if skills[name].timer <= 0 then return end wait(1) skills[name].timer -= 1 end end)
+				spawn(function() for i = 1, 999 do if skills[name].timer <= 0 then return end wait(0.01) skills[name].timer -= 0.01 end end)
 				game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("voleys"):InvokeServer(unpack(args))
 			else
 				useSkill = false
