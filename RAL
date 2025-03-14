@@ -706,6 +706,7 @@ end
 
 function UseSkill(name, CFrame)
 	if skills[name] then
+	print(table.unpack(skills[name]))
 		if name == "Energy Volley" then
 			local args = {
 				[1] = name,
