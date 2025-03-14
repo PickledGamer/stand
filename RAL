@@ -778,11 +778,21 @@ function valueMinimum()
 	return valueMinimo
 end
 
+function ChargeKi()
+	local args = {
+		[1] = "Blacknwhite27"
+	}
+		
+	game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("cha"):InvokeServer(unpack(args))
+	game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("of2"):FireServer()
+end
+
 function MeleeAttack(life) 
 	for i,v in pairs(Attacks) do
 		if valueMinimum() > v.required and workspace.Living:WaitForChild(p.Name):WaitForChild("Stats"):WaitForChild("Ki").Value >= requiredKi() and life then
 			game:GetService("ReplicatedStorage").Package.Events.mel:InvokeServer(v.name, "Blacknwhite27")
 		end
+		ChargeKi()
 	end
 end
 
@@ -793,6 +803,7 @@ function EnergyAttack(enemy, life)
 				FireEnergyAttack(v.name, v.subName, enemy)
 			end
 		end)
+		ChargeKi()
 		wait()
 	end
 end
@@ -1002,12 +1013,7 @@ function mainRunningFunction()
 		end
 	end
 	if workspace.Living:WaitForChild(p.Name).Stats.Ki.Value < workspace.Living:WaitForChild(p.Name).Stats.Ki.MaxValue and Fighting ~= true then
-		local args = {
-			[1] = "Blacknwhite27"
-		}
-			
-		game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("cha"):InvokeServer(unpack(args))
-		game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("of2"):FireServer()
+		ChargeKi()
 	end
 	if Rebirth and CheckStats(CalcRebCost()) and not justRebirthed then
 		game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("reb"):InvokeServer()
