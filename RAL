@@ -933,7 +933,7 @@ function mainRunningFunction()
 			if enemyModel:FindFirstChild("HumanoidRootPart") and enemyModel:FindFirstChild("Humanoid") then
 				if enemyModel.Humanoid.Health > 0 then
 					if enemyModel ~= nil then
-						workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart").CFrame = enemyModel.HumanoidRootPart.CFrame * CFrame.new(0,0,-2)
+						workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart").CFrame = enemyModel.HumanoidRootPart.CFrame * CFrame.new(0,0,2)
 					end
 				end
 			end
