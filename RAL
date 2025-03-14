@@ -789,7 +789,7 @@ function EnergyAttack(enemy, life)
 	for i,v in pairs(EnergyAttacks) do
 		pcall(function()
 			if valueMinimum() > v.force and life and ki() >= requiredKi() then
-				detectarAtaque(v.name, v.subName, enemy)
+				FireEnergyAttack(v.name, v.subName, enemy)
 			end
 		end)
 		wait()
