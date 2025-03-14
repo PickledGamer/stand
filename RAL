@@ -989,6 +989,17 @@ function mainRunningFunction()
 		game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("reb"):InvokeServer()
 		justRebirthed = true
 	end
+	if p:FindFirstChild("Status") then
+		for i,v in pairs(mskills) do
+			if not p.Status:FindFirstChild(i) then
+				v.timer = 0
+			else
+				if v.timer <= 0 then
+					v.timer += 1
+				end
+			end
+		end
+	end
 	if workspace:FindFirstChild("HBossValue") then
 		HBoss = workspace.HBossValue.Value
 	end
