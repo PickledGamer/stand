@@ -153,24 +153,6 @@ function load()
 	end
 end
 
-local millon = 1000000
-local Attacks = {
-	{name = "God Slicer",required = millon * 60},
-	{name = "Spirit Barrage",required = millon * 60},
-	{name = "Super Dragon Fist",required = millon * 50},
-	{name = "Flash Kick",required = millon / 2},
-	{name = "Spirit Breaking Cannon",required = 200000},
-	{name = "Mach Kick",required = 90000},
-	{name = "High Power Rush",required = 65000},
-	{name = "Meteor Crash",required = 28000},
-	{name = "Wolf Fang Fist",required = 2000},
-}
-local EnergyAttacks = {
-	{name = 'Soul Punisher',subName = 'Hak',force = 40000000},
-	{name = 'Destruction',subName = 'Hak',force = 40000000},
-	{name = 'Energy Volley',subName = 'voleys',force = 4000},
-}
-
 local dat = rep.Datas
 local num = 1
 local kbnum = 1
@@ -202,7 +184,7 @@ local Transportation = false
 
 load()
 wait(2)
-if game.PlaceId == earthPlanet and hasTeleported then
+if game.PlaceId == earthPlanet then
 	wait(7)
 	game:GetService("ReplicatedStorage").Package.Events.Start:InvokeServer()
 	game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Health = 0
