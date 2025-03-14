@@ -56,7 +56,7 @@ if workspace:FindFirstChild("AutoFarmActivated") then
 		end
 	end
 	for i,v in pairs(workspace:GetChildren()) do
-		if v.Name == "RunningAutoValue" or v.Name == "HBossValue" or v.Name == "RebirthValue" then
+		if v.Name == "RunningAutoValue" or v.Name == "HBossValue" or v.Name == "RebirthValue" or v.Name == "TeleportValue" then
 			v:Destroy()
 		end
 	end
