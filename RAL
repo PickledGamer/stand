@@ -163,7 +163,7 @@ local useSkill = false
 local skills = {
 	["Energy Volley"] = {
 		["req"] = 4000,
-		["cooldown"] = 10,
+		["cooldown"] = 7,
 		["timer"] = 0
 	}
 }
