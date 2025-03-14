@@ -769,7 +769,7 @@ function StartAuto()
 							end
 							task.wait()
 							Fighting = true
-							workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart").CFrame = v:WaitForChild("HumanoidRootPart").CFrame * CFrame.new(0,0,2)
+							workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart").CFrame = v:WaitForChild("HumanoidRootPart").CFrame * CFrame.new(0,0,3)
 							spawn(function()
 								game:GetService("ReplicatedStorage").Package.Events.p:FireServer("Blacknwhite27", 1)
 							end)
