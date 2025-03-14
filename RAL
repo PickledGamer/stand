@@ -707,6 +707,7 @@ function Trans(form)
 
 	game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("equipskill"):InvokeServer(unpack(args))
 	task.wait(0.5)
+	workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart")
 	game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("ta"):InvokeServer()
 	formattempts += 1
 	if formattempts > 25 then
@@ -823,7 +824,9 @@ function StartAuto()
 							break
 						end
 						task.wait(0.5)
-						Trans(UsableForm)
+						spawn(function()
+							Trans(UsableForm)
+						end)
 					until p.Status.Transformation.Value == UsableForm or workspace.Living:WaitForChild(p.Name):WaitForChild("Humanoid").Health <= 0 or workspace:FindFirstChild("AutoFarmAlreadyActive")
 					formattempts = 0
 				end
