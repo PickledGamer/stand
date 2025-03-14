@@ -928,32 +928,16 @@ function mainRunningFunction()
 	if workspace.Living:WaitForChild(p.Name).Stats.Ki.Value < workspace.Living:WaitForChild(p.Name).Stats.Ki.MaxValue and Fighting ~= true then
 		ChargeKi()
 	end
-	-- weld code
-	if workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart") then
-		if not workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart"):FindFirstChild("EnemyWeld") then
-			local ew = Instance.new("Weld", workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart"))
-			ew.Name = "EnemyWeld"
-			ew.Part0 = ew.Parent
-			ew.C0 = CFrame.new(0,0,-2)
-		end
-	end
-	--
 	if Fighting == true then
 		if enemyModel ~= nil then
 			if enemyModel:FindFirstChild("HumanoidRootPart") and enemyModel:FindFirstChild("Humanoid") then
 				if enemyModel.Humanoid.Health > 0 then
 					if enemyModel ~= nil then
-						workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart"):WaitForChild("EnemyWeld").Part1 = enemyModel.HumanoidRootPart
-						--workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart").CFrame = enemyModel.HumanoidRootPart.CFrame * CFrame.new(0,0,-2)
-					else
-						workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart"):WaitForChild("EnemyWeld").Part1 = nil
+						workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart").CFrame = enemyModel.HumanoidRootPart.CFrame * CFrame.new(0,0,-2)
 					end
 				end
 			end
 		end
-	end
-	if workspace.Living:WaitForChild(p.Name):WaitForChild("Humanoid").Health <= 0 or Running.Value == false or workspace:FindFirstChild("AutoFarmAlreadyActive") and workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart"):WaitForChild("EnemyWeld").Part1 ~= nil then
-		workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart"):WaitForChild("EnemyWeld").Part1 = nil
 	end
 	if Rebirth and CheckStats(CalcRebCost()) and not justRebirthed then
 		game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("reb"):InvokeServer()
