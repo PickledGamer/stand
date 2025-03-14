@@ -944,7 +944,7 @@ function mainRunningFunction()
 				if enemyModel.Humanoid.Health > 0 then
 					if enemyModel ~= nil then
 						workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart"):WaitForChild("EnemyWeld").Part1 = enemyModel.HumanoidRootPart
-						--workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart").CFrame = enemyModel.HumanoidRootPart.CFrame * CFrame.new(0,0,2)
+						--workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart").CFrame = enemyModel.HumanoidRootPart.CFrame * CFrame.new(0,0,-2)
 					else
 						workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart"):WaitForChild("EnemyWeld").Part1 = nil
 					end
