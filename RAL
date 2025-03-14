@@ -8,6 +8,7 @@ Auto Rebirth
 Auto Transform
 Auto Charge Ki
 ]]
+wait(5)
 local p = game.Players.LocalPlayer
 local rep = game.ReplicatedStorage
 local RUNSERV = game:GetService("RunService")
