@@ -923,14 +923,14 @@ function mainRunningFunction()
 		Transportation = workspace.TeleportValue.Value
 	end
 	if game.PlaceId == earthPlanet then
-		if CheckStats("100b") then
+		if CheckStats("50m") and Transportation then
+			boss = "TO BILLS PLANET"
+		elseif CheckStats("100b") then
 			boss = "Wukong Black"
 		elseif CheckStats("50b") then
 			boss = "Wukong"
 		elseif CheckStats("56.25m") and HBoss then
 			boss = "Winter Wukong"
-		elseif CheckStats("50m") and Transportation then
-			boss = "TO BILLS PLANET"
 		elseif CheckStats("37.5m") then
 			boss = "SSJG Kakata"
 		elseif CheckStats("12.5m") then
