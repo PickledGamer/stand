@@ -325,7 +325,7 @@ TextLabel.BackgroundColor3 = Color3.fromRGB(77, 77, 77)
 TextLabel.BackgroundTransparency = 0.500
 TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 TextLabel.BorderSizePixel = 0
-TextLabel.Position = UDim2.new(0.8, 0, 0.4, 0)
+TextLabel.Position = UDim2.new(0.8, 0, 0.5, 0)
 TextLabel.Size = UDim2.new(0.150000006, 0, 0.100000001, 0)
 TextLabel.Font = Enum.Font.SourceSans
 TextLabel.Text = "Stats"
@@ -917,10 +917,10 @@ function mainRunningFunction()
 			if enemyModel:FindFirstChild("HumanoidRootPart") and enemyModel:FindFirstChild("Humanoid") and enemyModel:FindFirstChild("Status") then
 				if enemyModel.Humanoid.Health > 0 then
 					if enemyModel.Status:FindFirstChild("UsingSkill") then
-						if enemyModel.Status.UsingSkill == true then
+						if enemyModel.Status.UsingSkill.Value == true then
 							workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart").CFrame = enemyModel.HumanoidRootPart.CFrame * CFrame.new(0,0,-200)
 						else
-							workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart").CFrame = enemyModel.HumanoidRootPart.CFrame * CFrame.new(0,0,3)
+							workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart").CFrame = enemyModel.HumanoidRootPart.CFrame * CFrame.new(0,0,2)
 						end
 					end
 				end
