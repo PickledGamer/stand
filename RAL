@@ -816,7 +816,6 @@ function StartAuto()
 							spawn(function()
 								if not useSkill then 
 									UseMSkill("Meteor Crash")
-									wait(2.75)
 									UseMSkill("Mach Kick")
 									useMSkill = false
 								end
