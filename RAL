@@ -721,63 +721,6 @@ p.OnTeleport:Connect(function(State)
 	end
 end)
 
-function requiredKi()
-	return workspace.Living:WaitForChild(p.Name):WaitForChild("Stats"):WaitForChild("Ki").MaxValue/10
-end
-
-function totalUsingKi()
-	return workspace.Living:WaitForChild(p.Name):WaitForChild("Stats"):WaitForChild("Ki").MaxValue/2
-end
-
-function FireEnergyAttack(name, subname, enemy)
-	local args = {
-		[1] = name,
-		[2] = {
-			["FaceMouse"] = true,
-			["MouseHit"] = enemy
-		},
-		[3] = "Blacknwhite27"
-	}
-	game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild(subname):InvokeServer(unpack(args))
-end
-
-local folderData = dat[p.UserId]
-
-function rebirthzzzz()
-	return folderData.Rebirth.Value
-end
-function strength()
-	return folderData.Strength.Value
-end
-function energy()
-	return folderData.Energy.Value
-end
-function defense()
-	return folderData.Defense.Value
-end
-function speed()
-	return folderData.Speed.Value
-end
-function ki()
-	return workspace.Living:WaitForChild(p.Name):WaitForChild("Stats"):WaitForChild("Ki").Value
-end
-
-function valueMinimum()
-	local valueMinimo = strength()
-
-	if energy() < valueMinimo then
-		valueMinimo = energy()
-	end
-	if defense() < valueMinimo then
-		valueMinimo = defense()
-	end
-	if speed() < valueMinimo then
-		valueMinimo = speed()
-	end
-
-	return valueMinimo
-end
-
 function ChargeKi()
 	local args = {
 		[1] = "Blacknwhite27"
@@ -785,31 +728,6 @@ function ChargeKi()
 		
 	game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("cha"):InvokeServer(unpack(args))
 	game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("of2"):FireServer()
-end
-
-function MeleeAttack(life) 
-	for i,v in pairs(Attacks) do
-		if valueMinimum() > v.required and workspace.Living:WaitForChild(p.Name):WaitForChild("Stats"):WaitForChild("Ki").Value >= requiredKi() and life then
-			game:GetService("ReplicatedStorage").Package.Events.mel:InvokeServer(v.name, "Blacknwhite27")
-		end
-		spawn(function()
-			ChargeKi()
-		end)
-	end
-end
-
-function EnergyAttack(enemy, life) 
-	for i,v in pairs(EnergyAttacks) do
-		pcall(function()
-			if valueMinimum() > v.force and life and ki() >= requiredKi() then
-				FireEnergyAttack(v.name, v.subName, enemy)
-			end
-		end)
-		spawn(function()
-			ChargeKi()
-		end)
-		wait()
-	end
 end
 
 function StartAuto()
@@ -870,18 +788,8 @@ function StartAuto()
 							task.wait()
 							Fighting = true
 							workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart").CFrame = v:WaitForChild("HumanoidRootPart").CFrame * CFrame.new(0,0,2)
-							spawn(function() 
-								if ki() >= requiredKi() and valueMinimum() >= 4000 then
-									EnergyAttack(frameEnemigo(), vidaEnemigo())
-									wait(1)
-								else
-									game:GetService("ReplicatedStorage").Package.Events.p:FireServer("Blacknwhite27", 1)
-								end
-							end)
 							spawn(function()
-								if ki() >= requiredKi() and valueMinimum() >= 2000 then
-									MeleeAttack(vidaEnemigo())
-								end
+								game:GetService("ReplicatedStorage").Package.Events.p:FireServer("Blacknwhite27", 1)
 							end)
 							spawn(function()
 								if v:FindFirstChild("Humanoid") and (v.Humanoid.Health/v.Humanoid.MaxHealth)*100 <= 90 then
