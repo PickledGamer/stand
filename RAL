@@ -934,7 +934,7 @@ function mainRunningFunction()
 			local ew = Instance.new("Weld", workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart"))
 			ew.Name = "EnemyWeld"
 			ew.Part0 = ew.Parent
-			ew.C0 = CFrame.new(0,0,2)
+			ew.C0 = CFrame.new(0,0,-2)
 		end
 	end
 	--
