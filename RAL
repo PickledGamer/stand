@@ -740,7 +740,7 @@ function UseMSkill(name)
 			[1] = name,
 			[2] = "Blacknwhite27"
 		}
-		if mskills[name].timer <= 0 and dat[p.UserId].Energy.Value > mskills[name].req then
+		if mskills[name].timer <= 0 and dat[p.UserId].Strength.Value > mskills[name].req and dat[p.UserId].Speed.Value > mskills[name].req then
 			mskills[name].timer = mskills[name].cooldown
 			spawn(function() for i = 1, 999 do if mskills[name].timer <= 0 then return end wait(0.01) mskills[name].timer -= 0.01 end end)
 			game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("mel"):InvokeServer(unpack(args))
