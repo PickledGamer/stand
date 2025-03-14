@@ -160,6 +160,7 @@ local formattempts = 0
 local UsableForm = "None"
 local boss = "Klirin"
 local npc = "Klirin"
+local enemyModel = nil
 local afa = Instance.new("BoolValue", workspace)
 afa.Name = "AutoFarmActivated"
 afa.Value = false
@@ -763,13 +764,14 @@ function StartAuto()
 				end
 				if v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
 					if v:FindFirstChild("HumanoidRootPart") then
+						enemyModel = v
 						repeat
 							if workspace:FindFirstChild("AutoFarmAlreadyActive") then
+								enemyModel = nil
 								break
 							end
 							task.wait()
 							Fighting = true
-							workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart").CFrame = v:WaitForChild("HumanoidRootPart").CFrame * CFrame.new(0,0,3)
 							spawn(function()
 								game:GetService("ReplicatedStorage").Package.Events.p:FireServer("Blacknwhite27", 1)
 							end)
@@ -792,6 +794,7 @@ function StartAuto()
 								num = 1
 							end
 						until v:WaitForChild("Humanoid").Health <= 0 or game.ReplicatedStorage.Datas[p.UserId].Quest.Value == "" or game.ReplicatedStorage.Datas[p.UserId].Quest.Value == nil or workspace:FindFirstChild("AutoFarmAlreadyActive")
+						enemyModel = nil
 						Fighting = false
 					else
 						if boss == "Wukong Black" then
@@ -908,6 +911,15 @@ function mainRunningFunction()
 	end
 	if workspace.Living:WaitForChild(p.Name).Stats.Ki.Value < workspace.Living:WaitForChild(p.Name).Stats.Ki.MaxValue and Fighting ~= true then
 		ChargeKi()
+	end
+	if Fighting == true then
+		if enemyModel ~= nil then
+			if enemyModel:FindFirstChild("HumanoidRootPart") and enemyModel:FindFirstChild("Humanoid") then
+				if enemyModel.Humanoid.Health > 0 then
+					workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart").CFrame = enemyModel.HumanoidRootPart.CFrame * CFrame.new(0,0,3)
+				end
+			end
+		end
 	end
 	if Rebirth and CheckStats(CalcRebCost()) and not justRebirthed then
 		game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("reb"):InvokeServer()
