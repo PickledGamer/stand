@@ -160,6 +160,14 @@ local formattempts = 0
 local UsableForm = "None"
 local boss = "Klirin"
 local npc = "Klirin"
+local blocking = false
+local skills = {
+	["Energy Volley"] = {
+		["req"] = 4000,
+		["cooldown"] = 10,
+		["timer"] = 0
+	}
+}
 local enemyModel = nil
 local afa = Instance.new("BoolValue", workspace)
 afa.Name = "AutoFarmActivated"
@@ -222,7 +230,7 @@ ca.Parent=ba;
 ca.Active=true
 ca.BackgroundColor3=Color3.new(0.176471,0.176471,0.176471)
 ca.Draggable=true
-ca.Position=UDim2.new(0.7,0,0.1,0)
+ca.Position=UDim2.new(0.7,0,0.05,0)
 ca.Size=UDim2.fromScale(0.233,0.085)
 ca.Font=Enum.Font.SourceSansSemibold;
 ca.Text="Anti Afk"
@@ -713,6 +721,28 @@ function ChargeKi()
 	game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("of2"):FireServer()
 end
 
+function UseSkill(name, CFrame)
+	spawn(function()
+		for i,v in pairs(skills) do
+			if name == v and v == "Energy Volley" then
+				local args = {
+					[1] = name,
+					[2] = {
+						["FaceMouse"] = true,
+						["MouseHit"] = CFrame
+					},
+					[3] = "Blacknwhite27"
+				}
+				if v.timer <= 0 and dat[p.UserId].Energy.Value > v.req then
+					v.timer = v.cooldown
+					spawn(function() for i = 1, 999 do if v.timer <= 0 then return end wait(1) v.timer -= 1 end end)
+					game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("voleys"):InvokeServer(unpack(args))
+				end
+			end
+		end
+	end)
+end
+
 function StartAuto()
 	while Running.Value do
 		if workspace:FindFirstChild("AutoFarmAlreadyActive") then
@@ -772,23 +802,28 @@ function StartAuto()
 							end
 							task.wait()
 							Fighting = true
-							spawn(function()
-								game:GetService("ReplicatedStorage").Package.Events.p:FireServer("Blacknwhite27", 1)
-							end)
-							spawn(function()
-								if v:FindFirstChild("Humanoid") and (v.Humanoid.Health/v.Humanoid.MaxHealth)*100 <= 90 then
-									if v.Humanoid.RequiresNeck == false then
-										v.Humanoid.RequiresNeck = true
-									end
-									if v:FindFirstChild("Head") and v.Head:FindFirstChild("Neck") then
-										if v.Head.Neck.Enabled == true then
-											v.Head.Neck.Enabled = false
-										else
-											v.Head.Neck:Destroy()
+							if not blocking then
+								spawn(function()
+									game:GetService("ReplicatedStorage").Package.Events.p:FireServer("Blacknwhite27", 1)
+								end)
+								spawn(function()
+									UseSkill("Energy Volley", v.HumanoidRootPart.CFrame)
+								end)
+								spawn(function()
+									if v:FindFirstChild("Humanoid") and (v.Humanoid.Health/v.Humanoid.MaxHealth)*100 <= 90 then
+										if v.Humanoid.RequiresNeck == false then
+											v.Humanoid.RequiresNeck = true
+										end
+										if v:FindFirstChild("Head") and v.Head:FindFirstChild("Neck") then
+											if v.Head.Neck.Enabled == true then
+												v.Head.Neck.Enabled = false
+											else
+												v.Head.Neck:Destroy()
+											end
 										end
 									end
-								end
-							end)
+								end)
+							end
 							num += 1
 							if num == 4 then
 								num = 1
@@ -918,11 +953,14 @@ function mainRunningFunction()
 				if enemyModel.Humanoid.Health > 0 then
 					if enemyModel.Status:FindFirstChild("UsingSkill") then
 						if enemyModel.Status.UsingSkill.Value == true then
-							workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart").CFrame = enemyModel.HumanoidRootPart.CFrame * CFrame.new(0,0,-200)
+							blocking = true
+							game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("block"):InvokeServer(true)
 						else
-							workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart").CFrame = enemyModel.HumanoidRootPart.CFrame * CFrame.new(0,0,2)
+							blocking = false
+							game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("block"):InvokeServer(false)
 						end
 					end
+					workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart").CFrame = enemyModel.HumanoidRootPart.CFrame * CFrame.new(0,0,2)
 				end
 			end
 		end
