@@ -792,7 +792,9 @@ function MeleeAttack(life)
 		if valueMinimum() > v.required and workspace.Living:WaitForChild(p.Name):WaitForChild("Stats"):WaitForChild("Ki").Value >= requiredKi() and life then
 			game:GetService("ReplicatedStorage").Package.Events.mel:InvokeServer(v.name, "Blacknwhite27")
 		end
-		ChargeKi()
+		spawn(function()
+			ChargeKi()
+		end)
 	end
 end
 
@@ -803,7 +805,9 @@ function EnergyAttack(enemy, life)
 				FireEnergyAttack(v.name, v.subName, enemy)
 			end
 		end)
-		ChargeKi()
+		spawn(function()
+			ChargeKi()
+		end)
 		wait()
 	end
 end
