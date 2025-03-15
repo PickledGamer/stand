@@ -353,7 +353,7 @@ MainBar.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
 MainBar.BackgroundTransparency = 1.000
 MainBar.BorderColor3 = Color3.fromRGB(0, 0, 0)
 MainBar.BorderSizePixel = 0
-MainBar.Position = UDim2.new(0.25, 0, 0.08, 0)
+MainBar.Position = UDim2.new(0.25, 0, -0.02, 0)
 MainBar.Size = UDim2.new(0.5, 0, 0.02, 0)
 
 GreenBar.Parent = MainBar
@@ -370,7 +370,7 @@ BossHealthText.BackgroundTransparency = 1.000
 BossHealthText.BorderColor3 = Color3.fromRGB(0, 0, 0)
 BossHealthText.BorderSizePixel = 0
 BossHealthText.Position = UDim2.new(0, 0, 0, 0)
-BossHealthText.Size = UDim2.new(0.150000006, 0, 0.100000001, 0)
+BossHealthText.Size = UDim2.new(1, 0, 1, 0)
 BossHealthText.Font = Enum.Font.SourceSans
 BossHealthText.Text = "Waiting On Boss"
 BossHealthText.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -769,6 +769,7 @@ function UpdateGUI()
 			MainBar.BackgroundTransparency = 0.000
 			GreenBar.BackgroundTransparency = 0.000
 			if workspace.Living:FindFirstChild(npc) and workspace.Living[npc]:FindFirstChild("Humanoid") then
+				GreenBar.Size = UDim2.fromScale(workspace.Living[npc].Humanoid.Health/workspace.Living[npc].Humanoid.MaxHealth,1)
 				BossHealthText.Text = "Health: ".. Short(workspace.Living[npc].Humanoid.Health) .. " / " .. Short(workspace.Living[npc].Humanoid.MaxHealth)
 			end
 			workspace.Gravity = 0
