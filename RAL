@@ -8,6 +8,40 @@ Auto Rebirth
 Auto Transform
 Auto Charge Ki
 ]]
+
+local abbreviations = {
+	"K",
+	"M",
+	"B",
+	"T",
+	"qd",
+	"qn",
+	"sx",
+	"sp",
+	"oc",
+	"no",
+	"De",
+	"uDe",
+	"dDe",
+	"tDe",
+	"qdD",
+	"qnD",
+	"sxD",
+	"spD",
+	"oDe",
+	"nDe",
+	"Vg",
+	"uVg",
+	"dVg",
+	"tVg",
+	"qdV",
+	"qnV",
+	"sxV",
+	"spV",
+	"ocV",
+	"noV",
+}
+
 local p = game.Players.LocalPlayer
 local rep = game.ReplicatedStorage
 local RUNSERV = game:GetService("RunService")
@@ -51,7 +85,7 @@ if workspace:FindFirstChild("AutoFarmActivated") then
 	RUNSERV:UnbindFromRenderStep(mainRunName)
 	workspace.AutoFarmActivated:Destroy()
 	for i,v in pairs(game.CoreGui:GetChildren()) do
-		if v.Name == "AutoFarmGuiBruh" or v.Name == "AntiAFKGuiBruh" then
+		if v.Name == "AutoFarmGuiBruh" or v.Name == "AntiAFKGuiBruh" or v.Name == "BossHealthBar" then
 			v:Destroy()
 		end
 	end
@@ -304,6 +338,48 @@ end)
 
 -- Stats GUI
 -- Instances:
+
+local BossHealthBar = Instance.new("ScreenGui")
+local MainBar = Instance.new("Frame")
+local GreenBar = Instance.new("Frame)
+local BossHealthText = Instance.new("TextLabel")
+
+BossHealthBar.Parent = game.CoreGui
+BossHealthBar.Name = "BossHealthBar"
+BossHealthBar.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+MainBar.Parent = BossHealthBar
+MainBar.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+MainBar.BackgroundTransparency = 1.000
+MainBar.BorderColor3 = Color3.fromRGB(0, 0, 0)
+MainBar.BorderSizePixel = 0
+MainBar.Position = UDim2.new(0.25, 0, 0.08, 0)
+MainBar.Size = UDim2.new(0.5, 0, 0.02, 0)
+
+GreenBar.Parent = MainBar
+GreenBar.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+GreenBar.BackgroundTransparency = 1.000
+GreenBar.BorderColor3 = Color3.fromRGB(0, 0, 0)
+GreenBar.BorderSizePixel = 0
+GreenBar.Position = UDim2.new(0, 0, 0, 0)
+GreenBar.Size = UDim2.new(1, 0, 1, 0)
+
+BossHealthText.Parent = MainBar
+BossHealthText.BackgroundColor3 = Color3.fromRGB(77, 77, 77)
+BossHealthText.BackgroundTransparency = 1.000
+BossHealthText.BorderColor3 = Color3.fromRGB(0, 0, 0)
+BossHealthText.BorderSizePixel = 0
+BossHealthText.Position = UDim2.new(0, 0, 0, 0)
+BossHealthText.Size = UDim2.new(0.150000006, 0, 0.100000001, 0)
+BossHealthText.Font = Enum.Font.SourceSans
+BossHealthText.Text = "Waiting On Boss"
+BossHealthText.TextColor3 = Color3.fromRGB(255, 255, 255)
+BossHealthText.TextScaled = true
+BossHealthText.TextSize = 14.000
+BossHealthText.TextStrokeTransparency = 0.000
+BossHealthText.TextWrapped = true
+
+-- kjahsdkjasjkdhaskjdhakjsdhakjsdohadkjh
 
 local ScreenGui = Instance.new("ScreenGui")
 local TextLabel = Instance.new("TextLabel")
@@ -610,6 +686,32 @@ TextButton_4.Activated:Connect(function()
 	end
 end)
 
+function Short(val)
+	if val <= 999 then
+		return tostring(tonumber(val))
+	end
+	local thing1 = "1e"
+	local ab = 1
+	local thing2 = 3
+	local newStr = ""
+	while wait() do
+		if val >= tonumber(thing1..thing2) and val <= tonumber(thing1..thing2+3) then
+			newStr = tostring(val/tonumber(thing1..thing2))
+			local getrid = 4
+			if val >= tonumber(thing1..thing2+2) then
+				getrid += 2
+			elseif val >= tonumber(thing1..thing2+1) then
+				getrid += 1
+			end
+			newStr = string.sub(newStr, 1, getrid)..abbreviations[ab]
+			return newStr
+		elseif val > tonumber(thing1..thing2+3) then
+			thing2 += 3
+			ab += 1
+		end
+	end
+end
+
 function comma_value(amount)
   local formatted = amount
   while true do  
@@ -655,15 +757,28 @@ function UpdateGUI()
 	end
 	TextLabel_6.Text = "Rebirths: " .. comma_value(plrData.Rebirth.Value) .. "\n Rebirth Cost: " .. comma_value(CalcRebCost())
 	if Running.Value then
+		MainBar.Visible = true
 		if game.ReplicatedStorage.Datas[p.UserId].Quest.Value ~= boss then
+			TextLabel.Text = "Stats"
+			MainBar.BackgroundTransparency = 1.000
+			GreenBar.BackgroundTransparency = 1.000
+			BossHealthText.Text = "Waiting On Boss"
 			workspace.Gravity = 196.2
 		else
+			TextLabel.Text = npc
+			MainBar.BackgroundTransparency = 0.000
+			GreenBar.BackgroundTransparency = 0.000
+			if workspace.Living:FindFirstChild(npc) and workspace.Living[npc]:FindFirstChild("Humanoid") then
+				BossHealthText.Text = "Health: ".. Short(workspace.Living[npc].Humanoid.Health) .. " / " .. Short(workspace.Living[npc].Humanoid.MaxHealth)
+			end
 			workspace.Gravity = 0
 		end
 		TextButton.Position = UDim2.fromScale(0.5,0)
 		TextButton.Text = "On"
 		Frame_3.BackgroundColor3 = Color3.new(0,1,0)
 	else
+		TextLabel.Text = "Stats"
+		MainBar.Visible = false
 		workspace.Gravity = 196.2
 		TextButton.Position = UDim2.fromScale(0,0)
 		TextButton.Text = "Off"
