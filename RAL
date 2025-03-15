@@ -859,7 +859,7 @@ function UseSkill(CFrame)
 			},
 			[3] = "Blacknwhite27"
 		}
-		if v.timer <= 0 and dat[p.UserId].Energy.Value > v.req then
+		if v.timer <= 0 and dat[p.UserId].Energy.Value > v.req and Fighting then
 			v.timer = v.cooldown
 			spawn(function() for i = 1, 999 do if v.timer <= 0 then return end wait(0.01) v.timer -= 0.01 end end)
 			game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild(v.subname):InvokeServer(unpack(args))
@@ -876,7 +876,7 @@ function UseMSkill()
 			[1] = i,
 			[2] = "Blacknwhite27"
 		}
-		if v.timer <= 0 and dat[p.UserId].Strength.Value > v.req and dat[p.UserId].Speed.Value > v.req then
+		if v.timer <= 0 and dat[p.UserId].Strength.Value > v.req and dat[p.UserId].Speed.Value > v.req and Fighting then
 			v.timer = v.cooldown
 			spawn(function() for i = 1, 999 do if v.timer <= 0 then return end wait(0.01) v.timer -= 0.01 end end)
 			game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("mel"):InvokeServer(unpack(args))
@@ -973,9 +973,9 @@ function StartAuto()
 								end
 							end)
 							spawn(function()
-								if not useMSkill then
+								--if not useMSkill then
 									game:GetService("ReplicatedStorage").Package.Events.p:FireServer("Blacknwhite27", 1)
-								end
+								--end
 							end)
 							spawn(function()
 								ChargeKi()
