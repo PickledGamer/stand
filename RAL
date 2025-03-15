@@ -1247,7 +1247,7 @@ function mainRunningFunction()
 	if workspace:FindFirstChild("RunningAutoValue").Value == true and run == false then
 		run = true
 		print("Started")
-		spawn(StartAuto())
+		spawn(function() StartAuto() end)
 	end
 	if workspace:FindFirstChild("RunningAutoValue").Value == true then
 		p.PlayerGui:WaitForChild("Main").MainFrame.Buttons.Visible = false
