@@ -201,12 +201,6 @@ local skills = {
 		["cooldown"] = 5.5,
 		["subname"] = "voleys",
 		["timer"] = 0
-	},
-	["Soul Punisher"] = {
-		["req"] = 40000000,
-		["cooldown"] = 15.5,
-		["subname"] = "Hak",
-		["timer"] = 0
 	}
 }
 local mskills = {
