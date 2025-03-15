@@ -343,6 +343,7 @@ local BossHealthBar = Instance.new("ScreenGui")
 local MainBar = Instance.new("Frame")
 local GreenBar = Instance.new("Frame")
 local BossHealthText = Instance.new("TextLabel")
+local BossNameText = Instance.new("TextLabel")
 
 BossHealthBar.Parent = game.CoreGui
 BossHealthBar.Name = "BossHealthBar"
@@ -378,6 +379,21 @@ BossHealthText.TextScaled = true
 BossHealthText.TextSize = 14.000
 BossHealthText.TextStrokeTransparency = 0.000
 BossHealthText.TextWrapped = true
+
+BossNameText.Parent = MainBar
+BossNameText.BackgroundColor3 = Color3.fromRGB(77, 77, 77)
+BossNameText.BackgroundTransparency = 1.000
+BossNameText.BorderColor3 = Color3.fromRGB(0, 0, 0)
+BossNameText.BorderSizePixel = 0
+BossNameText.Position = UDim2.new(0, 0, 1, 0)
+BossNameText.Size = UDim2.new(1, 0, 2, 0)
+BossNameText.Font = Enum.Font.SourceSans
+BossNameText.Text = ""
+BossNameText.TextColor3 = Color3.fromRGB(255, 255, 255)
+BossNameText.TextScaled = true
+BossNameText.TextSize = 14.000
+BossNameText.TextStrokeTransparency = 0.000
+BossNameText.TextWrapped = true
 
 -- kjahsdkjasjkdhaskjdhakjsdhakjsdohadkjh
 
@@ -759,19 +775,19 @@ function UpdateGUI()
 	if Running.Value then
 		MainBar.Visible = true
 		if game.ReplicatedStorage.Datas[p.UserId].Quest.Value ~= boss then
-			TextLabel.Text = "Stats"
+			BossNameText.Text = ""
 			MainBar.BackgroundTransparency = 1.000
 			GreenBar.BackgroundTransparency = 1.000
 			BossHealthText.Text = "Waiting On Boss"
 			workspace.Gravity = 196.2
 		else
-			TextLabel.Text = npc
+			BossNameText.Text = npc
 			MainBar.BackgroundTransparency = 0.000
 			GreenBar.BackgroundTransparency = 0.000
 			if workspace.Living:FindFirstChild(npc) and workspace.Living[npc]:FindFirstChild("Humanoid") then
 				local percentage = workspace.Living[npc].Humanoid.Health/workspace.Living[npc].Humanoid.MaxHealth
 				GreenBar.Size = UDim2.fromScale(percentage,1)
-				BossHealthText.Text = (percentage*100).."% Health: ".. Short(workspace.Living[npc].Humanoid.Health) .. " / " .. Short(workspace.Living[npc].Humanoid.MaxHealth)
+				BossHealthText.Text = math.round(percentage*100).."% Health: ".. Short(workspace.Living[npc].Humanoid.Health) .. " / " .. Short(workspace.Living[npc].Humanoid.MaxHealth)
 			end
 			workspace.Gravity = 0
 		end
@@ -779,7 +795,6 @@ function UpdateGUI()
 		TextButton.Text = "On"
 		Frame_3.BackgroundColor3 = Color3.new(0,1,0)
 	else
-		TextLabel.Text = "Stats"
 		MainBar.Visible = false
 		workspace.Gravity = 196.2
 		TextButton.Position = UDim2.fromScale(0,0)
