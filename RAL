@@ -979,7 +979,7 @@ function StartAuto()
 							end)
 							spawn(function()
 								ChargeKi()
-							end
+							end)
 						until v:WaitForChild("Humanoid").Health <= 0 or game.ReplicatedStorage.Datas[p.UserId].Quest.Value == "" or game.ReplicatedStorage.Datas[p.UserId].Quest.Value == nil or workspace:FindFirstChild("AutoFarmAlreadyActive")
 						enemyModel = nil
 						Fighting = false
