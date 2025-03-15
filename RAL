@@ -1041,7 +1041,7 @@ function StartAuto()
 						}
 					end
 					task.wait(1)
-					if not tp then
+					if not tp and workspace.Living:WaitForChild(p.Name):FindFirstChild("HumanoidRootPart") then
 						game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("Qaction"):InvokeServer(unpack(args))
 					else
 						game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("TP"):InvokeServer(unpack(args))
@@ -1250,14 +1250,14 @@ function mainRunningFunction()
 		spawn(StartAuto())
 	end
 	if workspace:FindFirstChild("RunningAutoValue").Value == true then
-		p.PlayerGui.Main.MainFrame.Buttons.Visible = false
-		p.PlayerGui.Main.MainFrame.Chat.Visible = false
-		for i,v in pairs(p.PlayerGui.Main.MainFrame.Frames:GetChildren()) do
+		p.PlayerGui:WaitForChild("Main").MainFrame.Buttons.Visible = false
+		p.PlayerGui:WaitForChild("Main").MainFrame.Chat.Visible = false
+		for i,v in pairs(p.PlayerGui:WaitForChild("Main").MainFrame.Frames:GetChildren()) do
 			if v.Name ~= "Quest" then
 				v.Visible = false
 			end
 		end
-		for i,v in pairs(p.PlayerGui.Main.MainFrame.Indicator:GetChildren()) do
+		for i,v in pairs(p.PlayerGui:WaitForChild("Main").MainFrame.Indicator:GetChildren()) do
 			if v.Name ~= "Zeni" and v:IsA("TextLabel") then
 				v.Visible = false
 			elseif v.Name == "Zeni" then
@@ -1265,9 +1265,9 @@ function mainRunningFunction()
 			end
 		end
 	else
-		p.PlayerGui.Main.MainFrame.Buttons.Visible = true
-		p.PlayerGui.Main.MainFrame.Chat.Visible = true
-		for i,v in pairs(p.PlayerGui.Main.MainFrame.Indicator:GetChildren()) do
+		p.PlayerGui:WaitForChild("Main").MainFrame.Buttons.Visible = true
+		p.PlayerGui:WaitForChild("Main").MainFrame.Chat.Visible = true
+		for i,v in pairs(p.PlayerGui:WaitForChild("Main").MainFrame.Indicator:GetChildren()) do
 			if v.Name == "Zeni" then
 				v.Position = UDim2.fromScale(0.01, 0.645)
 			end
