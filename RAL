@@ -977,9 +977,8 @@ function StartAuto()
 									game:GetService("ReplicatedStorage").Package.Events.p:FireServer("Blacknwhite27", 1)
 								end
 							end)
-							num += 1
-							if num == 4 then
-								num = 1
+							spawn(function()
+								ChargeKi()
 							end
 						until v:WaitForChild("Humanoid").Health <= 0 or game.ReplicatedStorage.Datas[p.UserId].Quest.Value == "" or game.ReplicatedStorage.Datas[p.UserId].Quest.Value == nil or workspace:FindFirstChild("AutoFarmAlreadyActive")
 						enemyModel = nil
