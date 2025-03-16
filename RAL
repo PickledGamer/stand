@@ -929,12 +929,6 @@ function StartAuto()
 			end
 			if game.ReplicatedStorage.Datas[p.UserId].Quest.Value == boss or npc == "Wukong Black" then
 				local v = workspace.Living:WaitForChild(npc)
-				local function frameEnemigo()
-					return v:WaitForChild("HumanoidRootPart").CFrame
-				end
-				local function vidaEnemigo()
-					return v:WaitForChild("Humanoid").Health > 0
-				end
 				if v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
 					if v:FindFirstChild("HumanoidRootPart") then
 						enemyModel = v
@@ -1096,7 +1090,7 @@ function mainRunningFunction()
 			return false
 		end
 	end
-	if workspace.Living:WaitForChild(p.Name).Stats.Ki.Value < workspace.Living:WaitForChild(p.Name).Stats.Ki.MaxValue and Fighting ~= true then
+	if workspace.Living:WaitForChild(p.Name).Stats.Ki.Value < workspace.Living:WaitForChild(p.Name).Stats.MaxKi.Value and Fighting ~= true then
 		ChargeKi()
 	end
 	if Fighting == true then
