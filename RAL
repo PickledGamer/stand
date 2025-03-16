@@ -886,6 +886,17 @@ function UseMSkill()
 	end
 end
 
+function getEnemy(val)
+	for i, v in pairs(workspace.Living:GetChildren()) do
+		if v and v.Name == val then
+			if v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+				return v
+			end
+		end
+	end
+	return false
+end
+
 function StartAuto()
 	while Running.Value do
 		if workspace:FindFirstChild("AutoFarmAlreadyActive") then
@@ -931,8 +942,8 @@ function StartAuto()
 			end
 			if game.ReplicatedStorage.Datas[p.UserId].Quest.Value == boss or game.ReplicatedStorage.Datas[p.UserId].Quest.Value == npc or npc == "Wukong Black" then
 				local v
-				if workspace.Living:FindFirstChild(npc) then
-					v = workspace.Living[npc]
+				if getEnemy(npc) then
+					v = getEnemy(npc)
 				end
 				if v and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
 					if v:FindFirstChild("HumanoidRootPart") then
