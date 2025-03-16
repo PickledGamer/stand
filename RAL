@@ -922,6 +922,8 @@ function StartAuto()
 			end
 			if boss == "Wukong" then
 				npc = "Oozaru"
+			elseif boss == "Top X Trainer" then
+				npc == "X Fighter"
 			elseif boss == "Top X Fighter" then
 				npc = "X Fighter Master"
 			else
@@ -1156,7 +1158,7 @@ function mainRunningFunction()
 		elseif CheckStats("35k") then
 			boss = "Radish"
 		elseif CheckStats(0) then
-			boss = "Klirin"
+			boss = "X Fighter Trainer"
 		end
 	elseif game.PlaceId == billsPlanet then
 		if CheckStats("1.37b") then
