@@ -923,7 +923,7 @@ function StartAuto()
 			if boss == "Wukong" then
 				npc = "Oozaru"
 			elseif boss == "Top X Trainer" then
-				npc == "X Fighter"
+				npc = "X Fighter"
 			elseif boss == "Top X Fighter" then
 				npc = "X Fighter Master"
 			else
