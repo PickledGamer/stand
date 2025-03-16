@@ -73,7 +73,7 @@ end)
 local billsPlanet = 5151400895
 local earthPlanet = 3311165597
 local earthTPVal = "Earth"
-local billsTPVal = "Vills Planet"
+local billsTPVal = "Bills Planet"
 
 local mainRunName = "MainAutoFarmThingy"
 local saveFileName = "DBUAutoScript.DATA"
