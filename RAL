@@ -930,8 +930,11 @@ function StartAuto()
 				npc = boss
 			end
 			if game.ReplicatedStorage.Datas[p.UserId].Quest.Value == boss or game.ReplicatedStorage.Datas[p.UserId].Quest.Value == npc or npc == "Wukong Black" then
-				local v = workspace.Living:WaitForChild(npc)
-				if v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+				local v
+				if workspace.Living:FindFirstChild(npc) then
+					v = workspace.Living[npc]
+				end
+				if v and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
 					if v:FindFirstChild("HumanoidRootPart") then
 						enemyModel = v
 						repeat
