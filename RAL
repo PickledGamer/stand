@@ -1,14 +1,3 @@
---[[
-Made By The One And Only IWallBangAndAimHack.
-the only thing stolen is anti afk but then again it was open source.
-
-features:
-Autofarm Bosses - Note: currently this only punches; punch combo 1-3 instead of base 1-4; might make it only use 1 and 2
-Auto Rebirth
-Auto Transform
-Auto Charge Ki
-]]
-
 local abbreviations = {
 	"K",
 	"M",
