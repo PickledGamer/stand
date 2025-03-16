@@ -735,26 +735,26 @@ function UpdateGUI()
 	local plrData = dat[p.UserId]
 	local charStats = workspace.Living:WaitForChild(p.Name):WaitForChild("Stats")
 	if plrData.Strength.Value == charStats.Strength.Value then
-		TextLabel_2.Text = "Strength: " .. comma_value(plrData.Strength.Value)
+		TextLabel_2.Text = "Strength: " .. comma_value(math.round(plrData.Strength.Value))
 	else
-		TextLabel_2.Text = "Strength: " .. comma_value(plrData.Strength.Value) .. " +(" .. comma_value(charStats.Strength.Value - plrData.Strength.Value) .. ")"
+		TextLabel_2.Text = "Strength: " .. comma_value(math.round(plrData.Strength.Value)) .. " +(" .. comma_value(math.round(charStats.Strength.Value - plrData.Strength.Value)) .. ")"
 	end
 	if plrData.Strength.Value == charStats.Strength.Value then
-		TextLabel_3.Text = "Speed: " .. comma_value(plrData.Speed.Value)
+		TextLabel_3.Text = "Speed: " .. comma_value(math.round(plrData.Speed.Value))
 	else
-		TextLabel_3.Text = "Speed: " .. comma_value(plrData.Speed.Value) .. " +(" .. comma_value(charStats.Speed.Value - plrData.Speed.Value) .. ")"
+		TextLabel_3.Text = "Speed: " .. comma_value(math.round(plrData.Speed.Value)) .. " +(" .. comma_value(math.round(charStats.Speed.Value - plrData.Speed.Value)) .. ")"
 	end
 	if plrData.Strength.Value == charStats.Strength.Value then
-		TextLabel_4.Text = "Defense: " .. comma_value(plrData.Defense.Value)
+		TextLabel_4.Text = "Defense: " .. comma_value(math.round(plrData.Defense.Value))
 	else
-		TextLabel_4.Text = "Defense: " .. comma_value(plrData.Defense.Value) .. " +(" .. comma_value(charStats.Defense.Value - plrData.Defense.Value) .. ")"
+		TextLabel_4.Text = "Defense: " .. comma_value(math.round(plrData.Defense.Value)) .. " +(" .. comma_value(math.round(charStats.Defense.Value - plrData.Defense.Value)) .. ")"
 	end
 	if plrData.Strength.Value == charStats.Strength.Value then
-		TextLabel_5.Text = "Energy: " .. comma_value(plrData.Energy.Value)
+		TextLabel_5.Text = "Energy: " .. comma_value(math.round(plrData.Energy.Value))
 	else
-		TextLabel_5.Text = "Energy: " .. comma_value(plrData.Energy.Value) .. " +(" .. comma_value(charStats.Energy.Value - plrData.Energy.Value) .. ")"
+		TextLabel_5.Text = "Energy: " .. comma_value(math.round(plrData.Energy.Value)) .. " +(" .. comma_value(math.round(charStats.Energy.Value - plrData.Energy.Value)) .. ")"
 	end
-	TextLabel_6.Text = "Rebirths: " .. comma_value(plrData.Rebirth.Value) .. "\n Rebirth Cost: " .. comma_value(CalcRebCost())
+	TextLabel_6.Text = "Rebirths: " .. comma_value(math.round(plrData.Rebirth.Value)) .. "\n Rebirth Cost: " .. comma_value(math.round(CalcRebCost()))
 	if Running.Value then
 		MainBar.Visible = true
 		if game.ReplicatedStorage.Datas[p.UserId].Quest.Value ~= boss then
