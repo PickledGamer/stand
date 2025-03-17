@@ -39,7 +39,7 @@ local TPSERV = game:GetService("TeleportService")
 local PLRSERV = game:GetService("Players")
 local justStarted = true
 
-local promptOverlay = game.CoreGui:WaitForChild("RobloxPromptGui").promptOverlay
+local promptOverlay = game.CoreGui:WaitForChild("RobloxPromptGui"):WaitForChild("promptOverlay")
 local over1Plr = false
 
 PlaceId, JobId = game.PlaceId, game.JobId
@@ -47,7 +47,7 @@ PlaceId, JobId = game.PlaceId, game.JobId
 RUNSERV:BindToRenderStep("CheckPlrCount", 2, function() if #PLRSERV:GetPlayers() <= 1 then over1Plr = false else over1Plr = true end end)
 
 promptOverlay.ChildAdded:Connect(function(theChildAddedInQuestion)
-	if theChildAddedInQuestion.Name == "ErrorPrompt" then
+	if theChildAddedInQuestion and theChildAddedInQuestion.Name == "ErrorPrompt" then
 		RUNSERV:UnbindFromRenderStep("CheckPlrCount")
 		repeat
 			if not over1Plr then
