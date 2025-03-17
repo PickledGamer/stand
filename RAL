@@ -256,7 +256,7 @@ load()
 if game.PlaceId == earthPlanet and justStarted then
 	wait(2)
 	game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("Start"):InvokeServer()
-	game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Health = 0
+	p.Character:WaitForChild("Humanoid").Health = 0
 	hasTeleported = false
 end
 Running:GetPropertyChangedSignal("Value"):Connect(function()
