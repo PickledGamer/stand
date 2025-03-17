@@ -770,7 +770,7 @@ function UpdateGUI()
 			if workspace.Living:FindFirstChild(npc) and workspace.Living[npc]:FindFirstChild("Humanoid") then
 				local percentage = workspace.Living[npc].Humanoid.Health/workspace.Living[npc].Humanoid.MaxHealth
 				GreenBar.Size = UDim2.fromScale(percentage,1)
-				BossHealthText.Text = math.round(percentage*100).."% Health: ".. Short(workspace.Living[npc].Humanoid.Health) .. " / " .. Short(workspace.Living[npc].Humanoid.MaxHealth)
+				BossHealthText.Text = math.round(percentage*100).."% Health: ".. Short(math.round(workspace.Living[npc].Humanoid.Health)) .. " / " .. Short(math.round(workspace.Living[npc].Humanoid.MaxHealth))
 			end
 			workspace.Gravity = 0
 		end
