@@ -37,6 +37,7 @@ local RUNSERV = game:GetService("RunService")
 local HTTPSERV = game:GetService("HttpService")
 local TPSERV = game:GetService("TeleportService")
 local PLRSERV = game:GetService("Players")
+local justStarted = true
 
 local promptOverlay = game.CoreGui:WaitForChild("RobloxPromptGui").promptOverlay
 local over1Plr = false
@@ -71,6 +72,7 @@ local mainRunName = "MainAutoFarmThingy"
 local saveFileName = "DBUAutoScript.DATA"
 
 if workspace:FindFirstChild("AutoFarmActivated") then
+	justStarted = false
 	local afaa = Instance.new("BoolValue", workspace)
 	afaa.Name = "AutoFarmAlreadyActive"
 	afaa.Value = false
@@ -251,10 +253,9 @@ local Fighting = false
 local Transportation = false
 
 load()
-wait(2)
-if game.PlaceId == earthPlanet then
+if game.PlaceId == earthPlanet and justStarted then
 	wait(2)
-	game:GetService("ReplicatedStorage").Package.Events.Start:InvokeServer()
+	game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("Start"):InvokeServer()
 	game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Health = 0
 	hasTeleported = false
 end
@@ -913,7 +914,7 @@ function StartAuto()
 		if workspace.Living:WaitForChild(p.Name):WaitForChild("Humanoid").Health > 0 then
 			if justRebirthed == true then
 				for i = 1, 5 do
-					task.wait(1)
+					task.wait(0.25)
 					local args = {
 						[1] = "Blacknwhite27",
 						[2] = num,
@@ -1057,7 +1058,7 @@ function StartAuto()
 							[1] = Thing
 						}
 					end
-					task.wait(1)
+					task.wait(0.25)
 					if not tp and workspace.Living:WaitForChild(p.Name):FindFirstChild("HumanoidRootPart") then
 						game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("Qaction"):InvokeServer(unpack(args))
 					else
