@@ -198,12 +198,27 @@ local mskills = {
 		["cooldown"] = 5.5,
 		["timer"] = 0
 	},
+	["High Power Rush"] = {
+		["req"] = 65000,
+		["cooldown"] = 5.5,
+		["timer"] = 0
+	},
 	["Mach Kick"] = {
 		["req"] = 90000,
 		["cooldown"] = 5.5,
 		["timer"] = 0
 	},
+	["Spirit Breaking Cannon"] = {
+		["req"] = 200000,
+		["cooldown"] = 5.5,
+		["timer"] = 0
+	},
 	["Super Dragon Fist"] = {
+		["req"] = 50000000,
+		["cooldown"] = 5.5,
+		["timer"] = 0
+	},
+	["Spirit Barrage"] = {
 		["req"] = 60000000,
 		["cooldown"] = 5.5,
 		["timer"] = 0
