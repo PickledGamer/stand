@@ -62,7 +62,7 @@ end)
 local billsPlanet = 5151400895
 local earthPlanet = 3311165597
 local earthTPVal = "Earth"
-local billsTPVal = "Bills Planet"
+local billsTPVal = "Vills Planet"
 
 local mainRunName = "MainAutoFarmThingy"
 local saveFileName = "DBUAutoScript.DATA"
@@ -929,7 +929,7 @@ function StartAuto()
 			else
 				npc = boss
 			end
-			if game.ReplicatedStorage.Datas[p.UserId].Quest.Value == boss or game.ReplicatedStorage.Datas[p.UserId].Quest.Value == npc or npc == "Wukong Black" then
+			if game.ReplicatedStorage.Datas[p.UserId].Quest.Value == boss or game.ReplicatedStorage.Datas[p.UserId].Quest.Value == npc or npc == "Wukong Black" and npc ~= "TO BILLS PLANET" and npc ~= "BACK TO EARTH" then
 				local v
 				if getEnemy(npc) then
 					v = getEnemy(npc)
