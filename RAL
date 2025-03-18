@@ -1181,7 +1181,9 @@ function mainRunningFunction()
 			boss = "X Fighter Trainer"
 		end
 	elseif game.PlaceId == billsPlanet then
-		if CheckStats("1.37b") then
+		if CheckStats("1.71b") and HBoss then
+			boss = "Winter Bills"
+		elseif CheckStats("1.37b") then
 			boss = "Vekuta (SSJBUI)"
 		elseif CheckStats("1.25b") then
 			boss = "Wukong Rose"
@@ -1189,8 +1191,6 @@ function mainRunningFunction()
 			boss = "Vekuta (LBSSJ4)"
 		elseif CheckStats("675m") then
 			boss = "Wukong (LBSSJ4)"
-		elseif CheckStats("492.5m") and HBoss then
-			boss = "Winter Bills"
 		elseif CheckStats("450m") then
 			boss = "Vegetable (LBSSJ4)"
 		elseif CheckStats("250m") then
