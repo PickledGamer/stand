@@ -1031,7 +1031,7 @@ function StartAuto()
 				--	formattempts = 0
 				--end
 				if boss ~= "Wukong Black" then
-					if workspace.Living:FindFirstChild("p.Name") and workspace.Living[p.Name]:FindFirstChild("HumanoidRootPart") then
+					if workspace.Living:FindFirstChild(p.Name) and workspace.Living[p.Name]:FindFirstChild("HumanoidRootPart") then
 						local tp = false
 						local args
 						if game.PlaceId == billsPlanet and boss == "BACK TO EARTH" then
