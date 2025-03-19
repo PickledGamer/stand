@@ -31,7 +31,9 @@ local abbreviations = {
 	"noV",
 }
 
-local p = game.Players.LocalPlayer
+local p = nil
+repeat wait() until game.Players.LocalPlayer
+p = game.Players.LocalPlayer
 local rep = game.ReplicatedStorage
 local RUNSERV = game:GetService("RunService")
 local HTTPSERV = game:GetService("HttpService")
