@@ -1266,7 +1266,7 @@ function mainRunningFunction()
 	end
 	if startingTimes >= 20 and executing ~= true then
 		executing = true
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/PickledGamer/stand/refs/heads/main/RAL"))()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/PickledGamer/stand/refs/heads/main/DBU%20AutoFarmV5.lua"))()
 	end
 	if workspace:FindFirstChild("RunningAutoValue").Value == true and run == false then
 		run = true
