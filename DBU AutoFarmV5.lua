@@ -108,6 +108,9 @@ local readfile = type(readfile) == "function" and function(file, safe)
     return readfile(file)
 end
 
+local queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
+
+
 function writefileExploit()
 	if writefile then
 		return true
@@ -116,6 +119,12 @@ end
 
 function readfileExploit()
 	if readfile then
+		return true
+	end
+end
+
+function queueTP()
+	if queueteleport then
 		return true
 	end
 end
@@ -181,6 +190,12 @@ function load()
 		end
 	end
 end
+
+p.OnTeleport:Connect(function()
+	if queueTP() then
+		queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/PickledGamer/stand/refs/heads/main/DBU%20AutoFarmV5.lua'))")
+	end
+end)
 
 local dat = rep:WaitForChild("Datas")
 local num = 1
