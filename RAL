@@ -180,7 +180,7 @@ function load()
 	end
 end
 
-local dat = rep.Datas
+local dat = rep:WaitForChild("Datas")
 local num = 1
 local kbnum = 1
 local formattempts = 0
