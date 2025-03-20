@@ -1073,15 +1073,17 @@ function StartAuto()
 									Thing2 = v
 								end
 							end
-							workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart").CFrame = Thing2.CFrame
+							if workspace.Living:FindFirstChild(p.Name) and workspace.Living[p.Name]:FindFirstChild("HumanoidRootPart") then
+								workspace.Living[p.Name].HumanoidRootPart.CFrame = Thing2.CFrame
+							end
 							args = {
 								[1] = Thing
 							}
 						end
 						task.wait(0.25)
-						if not tp and workspace.Living:WaitForChild(p.Name):FindFirstChild("HumanoidRootPart") then
+						if not tp and workspace.Living:FindFirstChild(p.Name) and workspace.Living[p.Name]:FindFirstChild("HumanoidRootPart") then
 							game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("Qaction"):InvokeServer(unpack(args))
-						else
+						elseif tp and workspace.Living:FindFirstChild(p.Name) and workspace.Living[p.Name]:FindFirstChild("HumanoidRootPart") then
 							game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("TP"):InvokeServer(unpack(args))
 						end
 					end
