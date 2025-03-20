@@ -72,6 +72,7 @@ local executing = false
 
 local mainRunName = "MainAutoFarmThingy"
 local saveFileName = "DBUAutoScript.DATA"
+local link = "https://raw.githubusercontent.com/PickledGamer/stand/main/DBU%20AutoFarmV5.lua"
 
 if workspace:FindFirstChild("AutoFarmActivated") then
 	justStarted = false
@@ -193,7 +194,7 @@ end
 
 p.OnTeleport:Connect(function()
 	if queueTP() then
-		queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/PickledGamer/stand/refs/heads/main/DBU%20AutoFarmV5.lua'))")
+		queueteleport("loadstring(game:HttpGet('"..link.."'))")
 	end
 end)
 
@@ -1285,7 +1286,7 @@ function mainRunningFunction()
 	end
 	if startingTimes >= 20 and executing ~= true then
 		executing = true
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/PickledGamer/stand/refs/heads/main/DBU%20AutoFarmV5.lua"))()
+		loadstring(game:HttpGet(link))()
 	end
 	if workspace:FindFirstChild("RunningAutoValue").Value == true and run == false then
 		run = true
