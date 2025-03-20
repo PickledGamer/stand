@@ -194,7 +194,8 @@ end
 
 p.OnTeleport:Connect(function()
 	if queueTP() then
-		queueteleport("loadstring(game:HttpGet('"..link.."'))")
+		local strinssg = "loadstring(game:HttpGet('"..link.."'))"
+		queueteleport(strinssg)
 	end
 end)
 
