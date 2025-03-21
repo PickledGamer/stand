@@ -1,3 +1,10 @@
+local billsPlanet = 5151400895
+local earthPlanet = 3311165597
+
+if game.PlaceId ~= billsPlanet and game.PlaceId ~= earthPlanet then
+	return
+end
+
 local abbreviations = {
 	"K",
 	"M",
@@ -62,8 +69,6 @@ promptOverlay.ChildAdded:Connect(function(theChildAddedInQuestion)
 	end
 end)
 
-local billsPlanet = 5151400895
-local earthPlanet = 3311165597
 local earthTPVal = "Earth"
 local billsTPVal = "Vills Planet"
 
