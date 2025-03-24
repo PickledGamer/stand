@@ -767,11 +767,14 @@ end
 
 function CalcRebCost()
 	local plrData = dat[p.UserId]
+	return 500000 + (500000 * plrData.Rebirth.Value)
+	--[[
 	if plrData.Rebirth.Value < 10 then
 		return 1000000 + (1000000 * plrData.Rebirth.Value)
 	else
 		return 10000000 + ((plrData.Rebirth.Value-9)*2000000)
 	end
+	]]
 end
 
 function UpdateGUI()
