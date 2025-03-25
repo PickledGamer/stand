@@ -763,6 +763,10 @@ function comma_value(amount)
   return formatted
 end
 
+function getZeni()
+	local plrData = dat[p.UserId]
+	return plrData.Zeni.Value
+end
 function CalcRebCost()
 	local plrData = dat[p.UserId]
 	return 500000 + (1000000 * plrData.Rebirth.Value)
@@ -1162,9 +1166,7 @@ function mainRunningFunction()
 		Transportation = workspace.TeleportValue.Value
 	end
 	if game.PlaceId == earthPlanet then
-		if CheckStats("50m") and Transportation then
-			boss = "TO BILLS PLANET"
-		elseif CheckStats("50b") then
+		if CheckStats("50b") then
 			boss = "Wukong"
 		elseif CheckStats("25b") then
 			boss = "Wukong Black"
@@ -1214,12 +1216,10 @@ function mainRunningFunction()
 			boss = "Wukong (Omen)"
 		elseif CheckStats("50m") then
 			boss = "Vegetable (GoD in-training)"
-		else
-			boss = "BACK TO EARTH"
 		end
 	end
 	if Transportation and tpTimer <= 0 then
-		if game.PlaceId == billsPlanet and boss == "BACK TO EARTH" then
+		if game.PlaceId == billsPlanet and not CheckStats("50m") then
 			tpTimer = 200
 			hasTeleported = true
 			save()
@@ -1229,7 +1229,7 @@ function mainRunningFunction()
 			if workspace.Living:FindFirstChild(p.Name) and workspace.Living[p.Name]:FindFirstChild("HumanoidRootPart") then
 				game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("TP"):InvokeServer(unpack(args))
 			end
-		elseif game.PlaceId == earthPlanet and boss == "TO BILLS PLANET" then
+		elseif game.PlaceId == earthPlanet and getZeni() >= ValCov("15k") and CheckStats("50m") then
 			tpTimer = 200
 			hasTeleported = true
 			save()
@@ -1243,7 +1243,11 @@ function mainRunningFunction()
 	elseif tpTimer > 0 then
 		tpTimer -= 1
 	end
-	if CheckStats("138m", 28) then
+	if CheckStats("500m", 50) then
+		UsableForm = "Ego Instinct"
+	elseif CheckStats("200m",30) and string.find(dat.UnlockedSkills.Value, '"Divine Blue":true') then
+		UsableForm = "Divine Blue"
+	elseif CheckStats("138m", 28) then
 		UsableForm = "Astral Instinct"
 	elseif CheckStats("120m", 24) then
 		UsableForm = "Beast"
