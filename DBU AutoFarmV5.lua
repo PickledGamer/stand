@@ -1,10 +1,6 @@
 local billsPlanet = 5151400895
 local earthPlanet = 3311165597
 
-if game.PlaceId ~= billsPlanet and game.PlaceId ~= earthPlanet then
-	return
-end
-
 local abbreviations = {
 	"K",
 	"M",
@@ -37,10 +33,11 @@ local abbreviations = {
 	"ocV",
 	"noV",
 }
-
-local p = nil
 repeat wait() until game.Players.LocalPlayer
-p = game.Players.LocalPlayer
+if game.PlaceId ~= billsPlanet and game.PlaceId ~= earthPlanet then
+	return
+end
+local p = game.Players.LocalPlayer
 local rep = game.ReplicatedStorage
 local RUNSERV = game:GetService("RunService")
 local HTTPSERV = game:GetService("HttpService")
@@ -136,6 +133,7 @@ function queueTP()
 end
 
 local hasTeleported = false
+local tpTimer = 200
 
 function save()
 	local dataToSave = {}
@@ -1059,42 +1057,22 @@ function StartAuto()
 				--end
 				if boss ~= "Wukong Black" then
 					if workspace.Living:FindFirstChild(p.Name) and workspace.Living[p.Name]:FindFirstChild("HumanoidRootPart") then
-						local tp = false
-						local args
-						if game.PlaceId == billsPlanet and boss == "BACK TO EARTH" then
-							tp = true
-							hasTeleported = true
-							save()
-							args = {
-								[1] = earthTPVal
-							}
-						elseif game.PlaceId == earthPlanet and boss == "TO BILLS PLANET" then
-							tp = true
-							hasTeleported = true
-							save()
-							args = {
-								[1] = billsTPVal
-							}
-						else
-							local Thing = workspace:WaitForChild("Others"):WaitForChild("NPCs"):WaitForChild(boss)
-							local Thing2 = nil
-							for i, v in pairs(Thing:GetDescendants()) do
-								if v.Name == "TriggerChat" then
-									Thing2 = v
-								end
+						local Thing = workspace:WaitForChild("Others"):WaitForChild("NPCs"):WaitForChild(boss)
+						local Thing2 = nil
+						for i, v in pairs(Thing:GetDescendants()) do
+							if v.Name == "TriggerChat" then
+								Thing2 = v
 							end
-							if workspace.Living:FindFirstChild(p.Name) and workspace.Living[p.Name]:FindFirstChild("HumanoidRootPart") then
-								workspace.Living[p.Name].HumanoidRootPart.CFrame = Thing2.CFrame
-							end
-							args = {
-								[1] = Thing
-							}
 						end
+						if workspace.Living:FindFirstChild(p.Name) and workspace.Living[p.Name]:FindFirstChild("HumanoidRootPart") then
+							workspace.Living[p.Name].HumanoidRootPart.CFrame = Thing2.CFrame
+						end
+						local args = {
+							[1] = Thing
+						}
 						task.wait(0.25)
-						if not tp and workspace.Living:FindFirstChild(p.Name) and workspace.Living[p.Name]:FindFirstChild("HumanoidRootPart") then
+						if workspace.Living:FindFirstChild(p.Name) and workspace.Living[p.Name]:FindFirstChild("HumanoidRootPart") then
 							game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("Qaction"):InvokeServer(unpack(args))
-						elseif tp and workspace.Living:FindFirstChild(p.Name) and workspace.Living[p.Name]:FindFirstChild("HumanoidRootPart") then
-							game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("TP"):InvokeServer(unpack(args))
 						end
 					end
 				end
@@ -1186,10 +1164,10 @@ function mainRunningFunction()
 	if game.PlaceId == earthPlanet then
 		if CheckStats("50m") and Transportation then
 			boss = "TO BILLS PLANET"
-		elseif CheckStats("100b") then
-			boss = "Wukong Black"
 		elseif CheckStats("50b") then
 			boss = "Wukong"
+		elseif CheckStats("25b") then
+			boss = "Wukong Black"
 		elseif CheckStats("56.25m") and HBoss then
 			boss = "Winter Wukong"
 		elseif CheckStats("37.5m") then
@@ -1239,6 +1217,29 @@ function mainRunningFunction()
 		else
 			boss = "BACK TO EARTH"
 		end
+	end
+	if game.PlaceId == billsPlanet and boss == "BACK TO EARTH" and tpTimer <= 0 then
+		tpTimer = 200
+		hasTeleported = true
+		save()
+		local args = {
+			[1] = earthTPVal
+		}
+		if workspace.Living:FindFirstChild(p.Name) and workspace.Living[p.Name]:FindFirstChild("HumanoidRootPart") then
+			game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("TP"):InvokeServer(unpack(args))
+		end
+	elseif game.PlaceId == earthPlanet and boss == "TO BILLS PLANET" and tpTimer <= 0 then
+		tpTimer = 200
+		hasTeleported = true
+		save()
+		local args = {
+			[1] = billsTPVal
+		}
+		if workspace.Living:FindFirstChild(p.Name) and workspace.Living[p.Name]:FindFirstChild("HumanoidRootPart") then
+			game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("TP"):InvokeServer(unpack(args))
+		end
+	elseif tpTimer > 0 then
+		tpTimer -= 1
 	end
 	if CheckStats("138m", 28) then
 		UsableForm = "Astral Instinct"
