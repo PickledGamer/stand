@@ -1218,25 +1218,27 @@ function mainRunningFunction()
 			boss = "BACK TO EARTH"
 		end
 	end
-	if game.PlaceId == billsPlanet and boss == "BACK TO EARTH" and tpTimer <= 0 then
-		tpTimer = 200
-		hasTeleported = true
-		save()
-		local args = {
-			[1] = earthTPVal
-		}
-		if workspace.Living:FindFirstChild(p.Name) and workspace.Living[p.Name]:FindFirstChild("HumanoidRootPart") then
-			game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("TP"):InvokeServer(unpack(args))
-		end
-	elseif game.PlaceId == earthPlanet and boss == "TO BILLS PLANET" and tpTimer <= 0 then
-		tpTimer = 200
-		hasTeleported = true
-		save()
-		local args = {
-			[1] = billsTPVal
-		}
-		if workspace.Living:FindFirstChild(p.Name) and workspace.Living[p.Name]:FindFirstChild("HumanoidRootPart") then
-			game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("TP"):InvokeServer(unpack(args))
+	if Transportation and tpTimer <= 0 then
+		if game.PlaceId == billsPlanet and boss == "BACK TO EARTH" then
+			tpTimer = 200
+			hasTeleported = true
+			save()
+			local args = {
+				[1] = earthTPVal
+			}
+			if workspace.Living:FindFirstChild(p.Name) and workspace.Living[p.Name]:FindFirstChild("HumanoidRootPart") then
+				game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("TP"):InvokeServer(unpack(args))
+			end
+		elseif game.PlaceId == earthPlanet and boss == "TO BILLS PLANET" then
+			tpTimer = 200
+			hasTeleported = true
+			save()
+			local args = {
+				[1] = billsTPVal
+			}
+			if workspace.Living:FindFirstChild(p.Name) and workspace.Living[p.Name]:FindFirstChild("HumanoidRootPart") then
+				game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("TP"):InvokeServer(unpack(args))
+			end
 		end
 	elseif tpTimer > 0 then
 		tpTimer -= 1
