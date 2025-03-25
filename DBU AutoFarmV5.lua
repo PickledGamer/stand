@@ -1245,7 +1245,7 @@ function mainRunningFunction()
 	end
 	if CheckStats("500m", 50) then
 		UsableForm = "Ego Instinct"
-	elseif CheckStats("200m",30) and string.find(dat.UnlockedSkills.Value, '"Divine Blue":true') then
+	elseif CheckStats("200m",30) and string.find(dat[p.UserId].UnlockedSkills.Value, '"Divine Blue":true') then
 		UsableForm = "Divine Blue"
 	elseif CheckStats("138m", 28) then
 		UsableForm = "Astral Instinct"
