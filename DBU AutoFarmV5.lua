@@ -1104,6 +1104,18 @@ function StartAuto()
 	run = false
 end
 
+function CheckForUntouchable(inp)
+	if workspace.Living:FindFirstChild(inp) then
+		if workspace.Living[inp]:FindFirstChild("Status") then
+			if workspace.Living[inp].Status:FindFirstChild("Untouchable") then
+				return true
+			else
+				return false
+			end
+		end
+	end
+end
+
 function mainRunningFunction()
 	if p.PlayerGui:FindFirstChild("Start") then
 		return
@@ -1186,7 +1198,7 @@ function mainRunningFunction()
 	if game.PlaceId == earthPlanet then
 		if CheckStats("50b") then
 			boss = "Wukong"
-		elseif CheckStats("25b") then
+		elseif CheckStats("25b") and not CheckForUntouchable("Wukong Black") then
 			boss = "Wukong Black"
 		elseif CheckStats("56.25m") and HBoss then
 			boss = "Winter Wukong"
