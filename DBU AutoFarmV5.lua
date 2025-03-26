@@ -1198,7 +1198,7 @@ function mainRunningFunction()
 	if game.PlaceId == earthPlanet then
 		if CheckStats("50b") then
 			boss = "Wukong"
-		elseif CheckStats("25b") and not CheckForUntouchable("Wukong Black") then
+		elseif CheckStats("200m") and not CheckForUntouchable("Wukong Black") then
 			boss = "Wukong Black"
 		elseif CheckStats("56.25m") and HBoss then
 			boss = "Winter Wukong"
