@@ -983,7 +983,7 @@ function StartAuto()
 			else
 				npc = boss
 			end
-			if game.ReplicatedStorage.Datas[p.UserId].Quest.Value == boss or game.ReplicatedStorage.Datas[p.UserId].Quest.Value == npc or npc == "Wukong Black" and npc ~= "TO BILLS PLANET" and npc ~= "BACK TO EARTH" then
+			if game.ReplicatedStorage.Datas[p.UserId].Quest.Value == boss or game.ReplicatedStorage.Datas[p.UserId].Quest.Value == npc or npc == "Wukong Black" then
 				local v
 				if getEnemy(npc) then
 					v = getEnemy(npc)
@@ -991,6 +991,7 @@ function StartAuto()
 				if v and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
 					if v:FindFirstChild("HumanoidRootPart") then
 						enemyModel = v
+						local continuing = true
 						repeat
 							if workspace:FindFirstChild("AutoFarmAlreadyActive") or Running.Value == false then
 								enemyModel = nil
@@ -1035,7 +1036,18 @@ function StartAuto()
 							spawn(function()
 								ChargeKi()
 							end)
-						until v:WaitForChild("Humanoid").Health <= 0 or game.ReplicatedStorage.Datas[p.UserId].Quest.Value == "" or game.ReplicatedStorage.Datas[p.UserId].Quest.Value == nil or workspace:FindFirstChild("AutoFarmAlreadyActive")
+							if v:WaitForChild("Humanoid").Health <= 0 then
+								continuing = false
+							end
+							if boss ~= "Wukong Black" then
+								if game.ReplicatedStorage.Datas[p.UserId].Quest.Value == "" or game.ReplicatedStorage.Datas[p.UserId].Quest.Value == nil then
+									continuing = false
+								end
+							end
+							if workspace:FindFirstChild("AutoFarmAlreadyActive") then
+								continuing = false
+							end
+						until continuing == false
 						enemyModel = nil
 						Fighting = false
 					else
