@@ -886,6 +886,9 @@ function ChargeKi()
 end
 
 function UseSkill(CFrame)
+	if workspace.Living:FindFirstChild(p.Name) and not workspace.Living[p.Name]:FindFirstChild("HumanoidRootPart") then
+		return
+	end
 	useSkill = true
 	for i,v in pairs(skills) do
 		local args = {
@@ -907,6 +910,9 @@ function UseSkill(CFrame)
 end
 
 function UseMSkill()
+	if workspace.Living:FindFirstChild(p.Name) and not workspace.Living[p.Name]:FindFirstChild("HumanoidRootPart") then
+		return
+	end
 	useMSkill = true
 	for i,v in pairs(mskills) do
 		local args = {
