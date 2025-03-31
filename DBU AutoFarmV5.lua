@@ -1257,7 +1257,7 @@ function mainRunningFunction()
 			if workspace.Living:FindFirstChild(p.Name) and workspace.Living[p.Name]:FindFirstChild("HumanoidRootPart") then
 				game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("TP"):InvokeServer(unpack(args))
 			end
-		elseif game.PlaceId == earthPlanet and [[ getZeni() >= ValCov("15k") and]] CheckStats("50m") then
+		elseif game.PlaceId == earthPlanet and [[ getZeni() >= ValCov("15k") and]] CheckStats("50m") and not CheckStats("50b") then
 			tpTimer = 200
 			hasTeleported = true
 			save()
