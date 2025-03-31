@@ -1247,7 +1247,7 @@ function mainRunningFunction()
 		end
 	end
 	if Transportation and tpTimer <= 0 then
-		if game.PlaceId == billsPlanet and not CheckStats("50m") then
+		if game.PlaceId == billsPlanet and not CheckStats("50m") or CheckStats("50b") then
 			tpTimer = 200
 			hasTeleported = true
 			save()
