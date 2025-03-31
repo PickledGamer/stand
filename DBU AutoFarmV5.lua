@@ -1254,7 +1254,7 @@ function mainRunningFunction()
 		end
 	end
 	local function CheckEarthStats()
-		if not CheckStats("50b") or CheckStats("50m") then
+		if not CheckStats("50b") and CheckStats("50m") then
 			return true
 		else
 			return false
