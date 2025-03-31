@@ -769,7 +769,11 @@ function getZeni()
 end
 function CalcRebCost()
 	local plrData = dat[p.UserId]
-	return 500000 + (1000000 * plrData.Rebirth.Value)
+	if workspace:GetAttribute("XPMultiplier") > 2 then
+		return 500000 + (500000 * plrData.Rebirth.Value)
+	else
+		return 500000 + (1000000 * plrData.Rebirth.Value)
+	end
 	--[[
 	if plrData.Rebirth.Value < 10 then
 		return 1000000 + (1000000 * plrData.Rebirth.Value)
