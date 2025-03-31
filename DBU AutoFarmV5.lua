@@ -769,7 +769,7 @@ function getZeni()
 end
 function CalcRebCost()
 	local plrData = dat[p.UserId]
-	if workspace:GetAttribute("XPMultiplier") > 2 then
+	if HBoss then
 		return 500000 + (500000 * plrData.Rebirth.Value)
 	else
 		return 500000 + (1000000 * plrData.Rebirth.Value)
@@ -1204,8 +1204,6 @@ function mainRunningFunction()
 			boss = "Wukong"
 		elseif CheckStats("200m") and not CheckForUntouchable("Wukong Black") then
 			boss = "Wukong Black"
-		elseif CheckStats("56.25m") and HBoss then
-			boss = "Winter Wukong"
 		elseif CheckStats("37.5m") then
 			boss = "SSJG Kakata"
 		elseif CheckStats("12.5m") then
@@ -1228,9 +1226,7 @@ function mainRunningFunction()
 			boss = "X Fighter Trainer"
 		end
 	elseif game.PlaceId == billsPlanet then
-		if CheckStats("1.71b") and HBoss then
-			boss = "Winter Bills"
-		elseif CheckStats("1.37b") then
+		if CheckStats("1.37b") then
 			boss = "Vekuta (SSJBUI)"
 		elseif CheckStats("1.25b") then
 			boss = "Wukong Rose"
@@ -1244,8 +1240,6 @@ function mainRunningFunction()
 			boss = "Vis (20%)"
 		elseif CheckStats("150m") then
 			boss = "Vills (50%)"
-		elseif CheckStats("112.5m") and HBoss then
-			boss = "Winter Roshi"
 		elseif CheckStats("75m") then
 			boss = "Wukong (Omen)"
 		elseif CheckStats("50m") then
@@ -1277,9 +1271,9 @@ function mainRunningFunction()
 	elseif tpTimer > 0 then
 		tpTimer -= 1
 	end
-	if CheckStats("500m", 50) then
-		UsableForm = "Ego Instinct"
-	elseif CheckStats("200m",30) and string.find(dat[p.UserId].UnlockedSkills.Value, '"Divine Blue":true') then
+	--if CheckStats("500m", 50) then
+	--	UsableForm = "Ego Instinct"
+	if CheckStats("200m",30) and string.find(dat[p.UserId].UnlockedSkills.Value, '"Divine Blue":true') then
 		UsableForm = "Divine Blue"
 	elseif CheckStats("138m", 28) then
 		UsableForm = "Astral Instinct"
