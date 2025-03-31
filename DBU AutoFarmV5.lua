@@ -1246,8 +1246,22 @@ function mainRunningFunction()
 			boss = "Vegetable (GoD in-training)"
 		end
 	end
+	local function CheckBillStats()
+		if not CheckStats("50m") or CheckStats("50b") then
+			return true
+		else
+			return false
+		end
+	end
+	local function CheckEarthStats()
+		if not CheckStats("50b") or CheckStats("50m") then
+			return true
+		else
+			return false
+		end
+	end
 	if Transportation and tpTimer <= 0 then
-		if game.PlaceId == billsPlanet and ((not CheckStats("50m")) or CheckStats("50b")) then
+		if game.PlaceId == billsPlanet and CheckBillStats() then
 			tpTimer = 200
 			hasTeleported = true
 			save()
@@ -1257,7 +1271,7 @@ function mainRunningFunction()
 			if workspace.Living:FindFirstChild(p.Name) and workspace.Living[p.Name]:FindFirstChild("HumanoidRootPart") then
 				game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("TP"):InvokeServer(unpack(args))
 			end
-		elseif game.PlaceId == earthPlanet and CheckStats("50m") and (not CheckStats("50b")) then
+		elseif game.PlaceId == earthPlanet and CheckEarthStats() then
 			tpTimer = 200
 			hasTeleported = true
 			save()
