@@ -197,7 +197,7 @@ local tpCheck = false
 p.OnTeleport:Connect(function()
 	if not tpCheck and queueTP() then
 		tpCheck = true
-		local strinssg = "loadstring(game:HttpGet('"..link.."'))"
+		local strinssg = "loadstring(game:HttpGet('"..link.."'))()"
 		queueteleport(strinssg)
 		error(strinssg)
 	end
