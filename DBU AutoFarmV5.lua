@@ -33,7 +33,17 @@ local abbreviations = {
 	"ocV",
 	"noV",
 }
+
+if not game:IsLoaded() then
+    local notLoaded = Instance.new("Message")
+    notLoaded.Parent = COREGUI
+    notLoaded.Text = "DBUAutoFarmV5, Waiting For Game To Load!"
+    game.Loaded:Wait()
+    notLoaded:Destroy()
+end
+
 repeat wait() until game.Players.LocalPlayer
+
 if game.PlaceId ~= billsPlanet and game.PlaceId ~= earthPlanet then
 	return
 end
