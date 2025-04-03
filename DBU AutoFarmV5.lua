@@ -1016,9 +1016,9 @@ function StartAuto()
 							wait()
 							Fighting = true
 							if v:FindFirstChild("HumanoidRootPart") then
-								UseSkill(v.HumanoidRootPart.CFrame)
+								--UseSkill(v.HumanoidRootPart.CFrame)
 								useSkill = false
-								UseMSkill()
+								--UseMSkill()
 								useMSkill = false
 							end
 							if v:FindFirstChild("Humanoid") and (v.Humanoid.Health/v.Humanoid.MaxHealth)*100 <= 90 then
@@ -1372,8 +1372,12 @@ function mainRunningFunction()
 			end
 		end
 	else
-		mainFram.Buttons.Visible = true
-		mainFram.Chat.Visible = true
+		if mainFram.Buttons.Visible == false then
+			mainFram.Buttons.Visible = true
+		end
+		if mainFram.Chat.Visible == false then
+			mainFram.Chat.Visible = true
+		end
 		for i,v in pairs(mainFram.Indicator:GetChildren()) do
 			if v.Name == "Zeni" and v.Position ~= UDim2.fromScale(0.01, 0.645) then
 				v.Position = UDim2.fromScale(0.01, 0.645)
