@@ -1385,6 +1385,7 @@ function mainRunningFunction()
 		end
 	end
 	UpdateGUI()
+	print("Tick:"..tick())
 end
 wait(2)
 if workspace:FindFirstChild("AutoFarmAlreadyActive") then
