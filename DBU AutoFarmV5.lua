@@ -878,7 +878,7 @@ function Trans(form)
 	}
 
 	game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("equipskill"):InvokeServer(unpack(args))
-	task.wait(0.5)
+	wait(0.5)
 	workspace.Living:WaitForChild(p.Name):WaitForChild("HumanoidRootPart")
 	game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("ta"):InvokeServer()
 	formattempts += 1
@@ -905,7 +905,7 @@ function UseSkill(CFrame)
 	end
 	useSkill = true
 	for i,v in pairs(skills) do
-		task.wait()
+		wait()
 		local args = {
 			[1] = i,
 			[2] = {
@@ -930,7 +930,7 @@ function UseMSkill()
 	end
 	useMSkill = true
 	for i,v in pairs(mskills) do
-		task.wait()
+		wait()
 		local args = {
 			[1] = i,
 			[2] = "Blacknwhite27"
@@ -961,11 +961,11 @@ function StartAuto()
 		if workspace:FindFirstChild("AutoFarmAlreadyActive") then
 			break
 		end
-		task.wait()
+		wait()
 		if workspace.Living:WaitForChild(p.Name):WaitForChild("Humanoid").Health > 0 then
 			if justRebirthed == true then
 				for i = 1, 5 do
-					task.wait(0.25)
+					wait(0.25)
 					local args = {
 						[1] = "Blacknwhite27",
 						[2] = num,
@@ -982,7 +982,7 @@ function StartAuto()
 						if workspace:FindFirstChild("AutoFarmAlreadyActive") or Running.Value == false then
 							break
 						end
-						task.wait(0.5)
+						wait(0.5)
 						spawn(function()
 							Trans(UsableForm)
 						end)
@@ -1013,7 +1013,7 @@ function StartAuto()
 								enemyModel = nil
 								break
 							end
-							task.wait()
+							wait()
 							Fighting = true
 							if v:FindFirstChild("HumanoidRootPart") then
 								UseSkill(v.HumanoidRootPart.CFrame)
@@ -1073,7 +1073,7 @@ function StartAuto()
 				--if p.Status.Transformation.Value ~= UsableForm and workspace.Living:WaitForChild(p.Name):WaitForChild("Humanoid").Health > 0 then
 				--	repeat
 				--		print(UsableForm)
-				--		task.wait()
+				--		wait()
 				--		Trans(UsableForm)
 				--	until p.Status.Transformation.Value == UsableForm
 				--	formattempts = 0
@@ -1093,7 +1093,7 @@ function StartAuto()
 						local args = {
 							[1] = Thing
 						}
-						task.wait(0.25)
+						wait(0.25)
 						if workspace.Living:FindFirstChild(p.Name) and workspace.Living[p.Name]:FindFirstChild("HumanoidRootPart") then
 							game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("Qaction"):InvokeServer(unpack(args))
 						end
