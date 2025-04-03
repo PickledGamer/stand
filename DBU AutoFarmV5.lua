@@ -103,12 +103,12 @@ end
 
 queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
 
-writefile = type(writefile) == "function" and function(file, data, safe)
+local writefile = type(writefile) == "function" and function(file, data, safe)
     if safe == true then return pcall(writefile, file, data) end
     writefile(file, data)
 end
 
-readfile = type(readfile) == "function" and function(file, safe)
+local readfile = type(readfile) == "function" and function(file, safe)
     if safe == true then return pcall(readfile, file) end
     return readfile(file)
 end
