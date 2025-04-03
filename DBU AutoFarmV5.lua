@@ -1160,7 +1160,7 @@ function mainRunningFunction()
 			return false
 		end
 	end
-	if workspace.Living:WaitForChild(p.Name).Stats.Ki.Value < workspace.Living:WaitForChild(p.Name).Stats.MaxKi.Value then
+	if workspace.Living:FindFirstChild(p.Name) and workspace.Living:WaitForChild(p.Name).Stats.Ki.Value < workspace.Living:WaitForChild(p.Name).Stats.MaxKi.Value then
 		ChargeKi()
 	else
 		EndChargeKi()
