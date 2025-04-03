@@ -1012,9 +1012,7 @@ function StartAuto()
 							Fighting = true
 							if v:FindFirstChild("HumanoidRootPart") then
 								UseSkill(v.HumanoidRootPart.CFrame)
-							end
-							useSkill = false
-							if not useSkill then 
+								useSkill = false
 								UseMSkill()
 								useMSkill = false
 							end
@@ -1033,14 +1031,8 @@ function StartAuto()
 									end
 								end
 							end
-							spawn(function()
-								--if not useMSkill then
-									game:GetService("ReplicatedStorage").Package.Events.p:FireServer("Blacknwhite27", 1)
-								--end
-							end)
-							spawn(function()
-								ChargeKi()
-							end)
+							game:GetService("ReplicatedStorage").Package.Events.p:FireServer("Blacknwhite27", 1)
+							ChargeKi()
 							if v:WaitForChild("Humanoid").Health <= 0 then
 								continuing = false
 							end
