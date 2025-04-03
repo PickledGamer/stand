@@ -1016,9 +1016,9 @@ function StartAuto()
 							wait()
 							Fighting = true
 							if v:FindFirstChild("HumanoidRootPart") then
-								--UseSkill(v.HumanoidRootPart.CFrame)
+								UseSkill(v.HumanoidRootPart.CFrame)
 								useSkill = false
-								--UseMSkill()
+								UseMSkill()
 								useMSkill = false
 							end
 							if v:FindFirstChild("Humanoid") and (v.Humanoid.Health/v.Humanoid.MaxHealth)*100 <= 90 then
@@ -1118,13 +1118,17 @@ function CheckForUntouchable(inp)
 end
 
 function mainRunningFunction()
+	UpdateGUI()
 	if p.PlayerGui:FindFirstChild("Start") then
+		return
+	end
+	if not workspace.Living:FindFirstChild(p.Name) then
 		return
 	end
 	local things = {"k","m","b","t","qd","qn"}
 	local vals = {"1000","1000000","1000000000","1000000000000","1000000000000000","1000000000000000000"}
 
-	function ValCov(inp)
+	local function ValCov(inp)
 		for i,v in pairs(things) do
 			if string.find(inp, v) then
 				local stringtonumber = string.gsub(inp, v, "")
@@ -1384,8 +1388,6 @@ function mainRunningFunction()
 			end
 		end
 	end
-	UpdateGUI()
-	print("Tick:"..tick())
 end
 wait(2)
 if workspace:FindFirstChild("AutoFarmAlreadyActive") then
