@@ -905,6 +905,7 @@ function UseSkill(CFrame)
 	end
 	useSkill = true
 	for i,v in pairs(skills) do
+		task.wait()
 		local args = {
 			[1] = i,
 			[2] = {
@@ -929,6 +930,7 @@ function UseMSkill()
 	end
 	useMSkill = true
 	for i,v in pairs(mskills) do
+		task.wait()
 		local args = {
 			[1] = i,
 			[2] = "Blacknwhite27"
