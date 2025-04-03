@@ -1010,35 +1010,29 @@ function StartAuto()
 							end
 							task.wait()
 							Fighting = true
-							spawn(function()
-								if v:FindFirstChild("HumanoidRootPart") then
-									UseSkill(v.HumanoidRootPart.CFrame)
+							if v:FindFirstChild("HumanoidRootPart") then
+								UseSkill(v.HumanoidRootPart.CFrame)
+							end
+							useSkill = false
+							if not useSkill then 
+								UseMSkill()
+								useMSkill = false
+							end
+							if v:FindFirstChild("Humanoid") and (v.Humanoid.Health/v.Humanoid.MaxHealth)*100 <= 90 then
+								if v.Humanoid.BreakJointsOnDeath == true then
+									v.Humanoid.BreakJointsOnDeath = false
 								end
-								useSkill = false
-							end)
-							spawn(function()
-								if not useSkill then 
-									UseMSkill()
-									useMSkill = false
+								if v.Humanoid.RequiresNeck == false then
+									v.Humanoid.RequiresNeck = true
 								end
-							end)
-							spawn(function()
-								if v:FindFirstChild("Humanoid") and (v.Humanoid.Health/v.Humanoid.MaxHealth)*100 <= 90 then
-									if v.Humanoid.BreakJointsOnDeath == true then
-										v.Humanoid.BreakJointsOnDeath = false
-									end
-									if v.Humanoid.RequiresNeck == false then
-										v.Humanoid.RequiresNeck = true
-									end
-									if v:FindFirstChild("Head") and v.Head:FindFirstChild("Neck") then
-										if v.Head.Neck.Enabled == true then
-											v.Head.Neck.Enabled = false
-										else
-											v.Head.Neck:Destroy()
-										end
+								if v:FindFirstChild("Head") and v.Head:FindFirstChild("Neck") then
+									if v.Head.Neck.Enabled == true then
+										v.Head.Neck.Enabled = false
+									else
+										v.Head.Neck:Destroy()
 									end
 								end
-							end)
+							end
 							spawn(function()
 								--if not useMSkill then
 									game:GetService("ReplicatedStorage").Package.Events.p:FireServer("Blacknwhite27", 1)
