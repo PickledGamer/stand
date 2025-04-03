@@ -56,17 +56,14 @@ local PLRSERV = game:GetService("Players")
 local justStarted = true
 
 local promptOverlay = game.CoreGui:WaitForChild("RobloxPromptGui"):WaitForChild("promptOverlay")
-local over1Plr = false
 
 PlaceId, JobId = game.PlaceId, game.JobId
 
-RUNSERV:BindToRenderStep("CheckPlrCount", 2, function() if #PLRSERV:GetPlayers() <= 1 then over1Plr = false else over1Plr = true end end)
 
 promptOverlay.ChildAdded:Connect(function(theChildAddedInQuestion)
 	if theChildAddedInQuestion and theChildAddedInQuestion.Name == "ErrorPrompt" then
-		RUNSERV:UnbindFromRenderStep("CheckPlrCount")
 		repeat
-			if not over1Plr then
+			if #PLRSERV:GetPlayers() <= 1 then
 				TPSERV:Teleport(PlaceId, p)
 			else
 				TPSERV:TeleportToPlaceInstance(PlaceId, JobId, p)
@@ -1360,28 +1357,33 @@ function mainRunningFunction()
 		run = true
 		print("Started")
 		startingTimes += 1
-		spawn(function() StartAuto() end)
+		StartAuto()
 	end
 	if workspace:FindFirstChild("RunningAutoValue").Value == true then
-		p.PlayerGui:WaitForChild("Main").MainFrame.Buttons.Visible = false
-		p.PlayerGui:WaitForChild("Main").MainFrame.Chat.Visible = false
-		for i,v in pairs(p.PlayerGui:WaitForChild("Main").MainFrame.Frames:GetChildren()) do
-			if v.Name ~= "Quest" then
+		local mainFram = p.PlayerGui:WaitForChild("Main").MainFrame
+		if mainFram.Buttons.Visible == true then
+			mainFram.Buttons.Visible = false
+		end
+		if mainFram.Chat.Visible == true then
+			mainFram.Chat.Visible = false
+		end
+		for i,v in pairs(mainFram.Frames:GetChildren()) do
+			if v.Name ~= "Quest" and v.Visible == true then
 				v.Visible = false
 			end
 		end
-		for i,v in pairs(p.PlayerGui:WaitForChild("Main").MainFrame.Indicator:GetChildren()) do
-			if v.Name ~= "Zeni" and v:IsA("TextLabel") then
+		for i,v in pairs(mainFram.Indicator:GetChildren()) do
+			if v.Name ~= "Zeni" and v:IsA("TextLabel") and v.Visible == true then
 				v.Visible = false
-			elseif v.Name == "Zeni" then
+			elseif v.Name == "Zeni" and v.Position ~= UDim2.fromScale(0.01, 0.8) then
 				v.Position = UDim2.fromScale(0.01, 0.8)
 			end
 		end
 	else
-		p.PlayerGui:WaitForChild("Main").MainFrame.Buttons.Visible = true
-		p.PlayerGui:WaitForChild("Main").MainFrame.Chat.Visible = true
-		for i,v in pairs(p.PlayerGui:WaitForChild("Main").MainFrame.Indicator:GetChildren()) do
-			if v.Name == "Zeni" then
+		mainFram.Buttons.Visible = true
+		mainFram.Chat.Visible = true
+		for i,v in pairs(mainFram.Indicator:GetChildren()) do
+			if v.Name == "Zeni" and v.Position ~= UDim2.fromScale(0.01, 0.645) then
 				v.Position = UDim2.fromScale(0.01, 0.645)
 			end
 		end
