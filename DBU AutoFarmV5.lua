@@ -101,14 +101,14 @@ function vtype(o, t)
     return type(o) == t
 end
 
-local queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
+queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
 
-local writefile = type(writefile) == "function" and function(file, data, safe)
+writefile = type(writefile) == "function" and function(file, data, safe)
     if safe == true then return pcall(writefile, file, data) end
     writefile(file, data)
 end
 
-local readfile = type(readfile) == "function" and function(file, safe)
+readfile = type(readfile) == "function" and function(file, safe)
     if safe == true then return pcall(readfile, file) end
     return readfile(file)
 end
@@ -193,11 +193,13 @@ function load()
 		end
 	end
 end
-
+local tpCheck = false
 p.OnTeleport:Connect(function()
-	if queueTP() then
+	if not tpCheck and queueTP() then
+		tpCheck = true
 		local strinssg = "loadstring(game:HttpGet('"..link.."'))"
 		queueteleport(strinssg)
+		error(strinssg)
 	end
 end)
 
