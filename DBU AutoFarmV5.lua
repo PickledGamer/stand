@@ -893,6 +893,9 @@ function ChargeKi()
 	}
 		
 	game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("cha"):InvokeServer(unpack(args))
+end
+
+function EndChargeKi()
 	game:GetService("ReplicatedStorage"):WaitForChild("Package"):WaitForChild("Events"):WaitForChild("of2"):FireServer()
 end
 
@@ -1032,7 +1035,6 @@ function StartAuto()
 								end
 							end
 							game:GetService("ReplicatedStorage").Package.Events.p:FireServer("Blacknwhite27", 1)
-							ChargeKi()
 							if v:WaitForChild("Humanoid").Health <= 0 then
 								continuing = false
 							end
@@ -1156,8 +1158,10 @@ function mainRunningFunction()
 			return false
 		end
 	end
-	if workspace.Living:WaitForChild(p.Name).Stats.Ki.Value < workspace.Living:WaitForChild(p.Name).Stats.MaxKi.Value and Fighting ~= true then
+	if workspace.Living:WaitForChild(p.Name).Stats.Ki.Value < workspace.Living:WaitForChild(p.Name).Stats.MaxKi.Value then
 		ChargeKi()
+	else
+		EndChargeKi()
 	end
 	if Fighting == true then
 		if enemyModel ~= nil then
